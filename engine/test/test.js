@@ -26,3 +26,7 @@ DameTestCase.prototype.testStory2 = function () {
     assertTrue(engine.tokenNumber('w') == 16);
     assertTrue(engine.tokenNumber('b') == 16);
 };
+
+DameTestCase.prototype.testStory3 = function(){
+    
+}
