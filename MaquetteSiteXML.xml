@@ -5,10 +5,11 @@
         <text>Dame%20Revisite%20Accueil%09%0Ahttp%3A//damerevisite.com</text>
       </controlProperties>
     </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="702" y="81" w="728" h="35" measuredW="279" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="702" y="81" w="728" h="35" measuredW="276" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <hrefs>Page%20enregistrement%26bm%3BPage%20enregistrement.bmml%26bm%3BPage%20enregistrement.bmml%26bm%3BPage%20enregistrement.bmml%2C%2CPage%20Login%26bm%3BPage%20Login.bmml%26bm%3BPage%20Login.bmml%26bm%3BPage%20Login.bmml</hrefs>
-        <text>Enregistrement%2C%20MonProfil%2C%20Connexion</text>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22527%2C77%2C830%2C112%22%20href%3D%22Page%2520enregistrement.bmml%22%20alt%3D%22Page%20enregistrement%22%20id%3D%221%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%221035%2C77%2C1253%2C112%22%20href%3D%22Page%2520Login.bmml%22%20alt%3D%22Page%20Login%22%20id%3D%221%22/%3E</map>
+        <text>Enregistrement%2C%20MonProfil%2C%20Connect%E9</text>
       </controlProperties>
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="268" y="116" w="1162" h="69" measuredW="77" measuredH="79" zOrder="2" locked="false" isInGroup="-1">
@@ -16,9 +17,10 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="322" y="137" w="114" h="-1" measuredW="114" measuredH="26" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="317" y="137" w="114" h="-1" measuredW="114" measuredH="26" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <href>Page%20accueil%26bm%3BPage%20accueil.bmml%26bm%3BPage%20accueil.bmml%26bm%3BPage%20accueil.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22142%2C133%2C256%2C159%22%20href%3D%22Page%2520accueil.bmml%22%20alt%3D%22Page%20accueil%22%20id%3D%223%22/%3E</map>
         <size>18</size>
         <text>Dame%20revisite</text>
         <textOrientation>right</textOrientation>
@@ -27,18 +29,21 @@
     <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="1065" y="137" w="-1" h="-1" measuredW="79" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <href>https%3A//www.facebook.com/damerevisitee/</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22890%2C133%2C969%2C160%22%20href%3D%22https%3A//www.facebook.com/damerevisitee/%22%20alt%3D%22https%3A//www.facebook.com/damerevisitee/%22%20id%3D%224%22%20target%3D%22_blank%22/%3E</map>
         <text>Facebook</text>
       </controlProperties>
     </control>
     <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="1153" y="137" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <href>https%3A//twitter.com/DameRevisite</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22978%2C133%2C1042%2C160%22%20href%3D%22https%3A//twitter.com/DameRevisite%22%20alt%3D%22https%3A//twitter.com/DameRevisite%22%20id%3D%225%22%20target%3D%22_blank%22/%3E</map>
         <text>Twitter</text>
       </controlProperties>
     </control>
     <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="772" y="443" w="155" h="42" measuredW="56" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <href>Page%20Jeu%20de%20dame%26bm%3BPage%20Jeu%20de%20dame.bmml%26bm%3BPage%20Jeu%20de%20dame.bmml%26bm%3BPage%20Jeu%20de%20dame.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22597%2C439%2C752%2C481%22%20href%3D%22Page%2520Jeu%2520de%2520dame.bmml%22%20alt%3D%22Page%20Jeu%20de%20dame%22%20id%3D%226%22/%3E</map>
         <text>Jouer</text>
       </controlProperties>
     </control>
