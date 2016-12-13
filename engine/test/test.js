@@ -12,9 +12,9 @@ DameTestCase.prototype.testStory1 = function () {
     for(var line=0;line<8;line++) {
         for (var column = 0; column < 8; column++) {
             if(line>0&& line<3)
-                assertTrue(board[0][0] == 'w');
+                assertTrue(board[line][column] == 'w');
             else if(line>4 && line<7)
-                assertTrue(board[0][0] == 'b');
+                assertTrue(board[line][column] == 'b');
             else
                 assertTrue(board[0][0] ==0);
         }
@@ -28,5 +28,5 @@ DameTestCase.prototype.testStory2 = function () {
 };
 
 DameTestCase.prototype.testStory3 = function(){
-    
-}
+
+};
