@@ -6,9 +6,14 @@
 
 var DameTestCase= TestCase("DameTestCase");
 var engine = new Engine();
+
 DameTestCase.prototype.testStory1 = function () {
-    var board=engine.init;
-    for(var i=0; i<8; i++){
-        assertTrue(board[i].equals([0,0,0,0,0,0,0,0]));
+    var board=engine.initBoard();
+
+    for(var line=0;line<8;line++) {
+        for (var column = 0; column < 8; column++) {
+            assertTrue(board[0][0] == 0);
+        }
     }
+
 };
