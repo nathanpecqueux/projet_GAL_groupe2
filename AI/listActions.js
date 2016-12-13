@@ -48,120 +48,85 @@ var board4 = [
 ];
 	
 AI = {
-	_sizeBoard: 8,
-	
-	/**
-	 * Affiche le plateau
-	 * */
-	show: function(board) {
-		var buffer = "";
+	BOARD: {
+		_board: [[]],
+		_sizeBoard: 8,
 		
-		for(var i=0 ; i<this._sizeBoard ; i++) {
-			buffer += "[";
-			for(var j=0 ; j<this._sizeBoard; j++) {
-				buffer += board[i][j];
-				if(j != this._sizeBoard -1) {
-					buffer += ",";
-				}
+		__init: function(board) {
+			this._board = board;
+		},
+		
+		getCell: function(line, column) {
+			if(this.inBoard(line, column)) {
+				return this._board[line][column];
 			}
-			buffer += "]\n";
-		}
+			return false;
+		},
 		
-		console.log(buffer);
-	},
-	
-	/**
-	 * 
-	 * */
-	 parseMarble: function(n) {
-		 switch(n) {
-			 case 0: return 0;
-			 case 1: return "PW";
-			 case 2: return "PB";
-			 case 3: return "QW";
-			 case 4: return "QB";
-			 default: throw new Error("Format de la cellule inconnu");
-		 }
-	 },
-	
-	/**
-	 * Liste les coordonnées des pièces
-	 * @param	[[Int]]	color
-	 * @return 	[string]
-	 * */
-	listCoord: function(board, color) {
-		if(color == "string") {
-			return this.listCoord$color(board, color);
-		} else {
-			return this.listCoord$both(board);
-		}
-	},
-	
-	listCoord$both: function(board) {
-		var coord = this.listCoord$color(board, "white");
-		coord.concat(this.listCoord$color(board, "black"));
+		setCell: function(line, column, value) {
+			this._board[line][column] = value;
+			return;
+		},
 		
-		return coord;
-	},
-	
-	listCoord$color: function(board, color) {
-		var coord = [];
-		var valuePawn, valueQueen;
-		
-		if(color == "black") {
-			valuePawn = 2;
-			valueQueen = 4;
-		} else if (color == "white") {
-			valuePawn = 1;
-			valueQueen = 3;
-		}
-		
-		for(var i=0 ; i<this._sizeBoard ; i++) {
-			for(var j=0 ; j<this._sizeBoard ; j++) {
-				c = "";
-				if(board[i][j] == valuePawn || board[i][j] == valueQueen) {
-					c += this.parseMarble(board[i][j]);
-					c += "-";
-					c += i;
-					c += j;
-					
-					coord.push(c);
+		show: function(_board) {
+			var buffer = "";
+			
+			for(var i=0 ; i<this._sizeBoard ; i++) {
+				buffer += "[";
+				for(var j=0 ; j<this._sizeBoard; j++) {
+					buffer += this.getCell(i,j);
+					if(j != this._sizeBoard -1) {
+						buffer += ",";
+					}
 				}
+				buffer += "]\n";
 			}
-		}
+			console.log(buffer);
+		},
 		
-		return coord;
+		isEmpty: function(l,c) {
+			if(!this.inBoard(l,c) || !this.getCell(l,c) || this.getCell(l,c) == 0) {
+				return true;
+			}
+			return false;
+		},
+		
+		inBoard: function(l,c) {
+			if(l >= 0 && l<this._sizeBoard && l >= 0 && c < this._sizeBoard) {
+				return true;
+			}
+			return false;
+		},
+		
 	},
 	
-	/**
-	 * Liste les mouvements possibles d'une pièce
-	 * @param	Coord
-	 * @return	
-	 * */
-	listMoves: function(board, color) {
+	LOGIC: {
+		displacementPawn: function() {
+			
+		},
+		
+		displacementQueen: function(cell) {
+			
+		},
+		
+		capturePawn: function(cell) {
+			
+		},
+		
+		captureQueen: function(cell) {
+			
+		},
+		
 		
 	},
 	
-	/**
-	 * Liste les déplacements possibles d'une pièce
-	 * */
-	 displacement: function(marble) {
-		 
-	 },
-	 
-	/**
-	 * Liste les captures possibles d'une pièce
-	 * */
-	 capture: function(marble) {
-		 
-	},
-	 
+	SIMULATION: {
+		
+	}, 
 };
 
 function main() {
-	AI.show(board);
-	console.log(AI.listCoord(board));
-	console.log(AI.listCoord(board, "black"));
+	runTU();
 }
 
 main();
