@@ -11,7 +11,7 @@ DameTestCase.prototype.testStory1 = function () {
     var board=engine.initBoard();
     for(var line=0;line<8;line++) {
         for (var column = 0; column < 8; column++) {
-            if(line>0&& line<3)
+            if(line>0 && line<3)
                 assertTrue(board[line][column] == 'w');
             else if(line>4 && line<7)
                 assertTrue(board[line][column] == 'b');
@@ -28,6 +28,20 @@ DameTestCase.prototype.testStory2 = function () {
 };
 
 DameTestCase.prototype.testStory3 = function(){
-    assertTrue(engine.getActualPlayer()=='white');
+    assertTrue(engine.getActualPlayer()=="white");
 };
 
+DameTestCase.prototype.testStory4 = function(){
+    assertTrue(engine.getColor("A1")=='w');
+    assertTrue(engine.getColor("A0")==0);
+};
+
+DameTestCase.prototype.testStory5 = function(){
+    assertTrue(engine.moveForward("A2")==3);
+    assertTrue(engine.moveLeft("A2")==-1);
+    assertTrue(engine.moveRight("A2")==1);
+};
+
+DameTestCase.prototype.testStory6 = function(){
+    assertTrue(engine.changePlayer()=="black");
+};
