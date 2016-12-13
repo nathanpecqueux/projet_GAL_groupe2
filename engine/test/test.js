@@ -28,5 +28,5 @@ DameTestCase.prototype.testStory2 = function () {
 };
 
 DameTestCase.prototype.testStory3 = function(){
-
+    assertTrue(engine.getActualPlayer()=='white');
 };
