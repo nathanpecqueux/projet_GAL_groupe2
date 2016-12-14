@@ -1,7 +1,12 @@
 <?php
 class JConfig {
+<<<<<<< HEAD
 	public $offline = '0';
 	public $offline_message = 'Ce site est en maintenance.<br /> Merci de revenir ultérieurement.';
+=======
+	public $offline = '1';
+	public $offline_message = 'veuillez entrer votre login et votre mot de passe ';
+>>>>>>> 8619ae16770f1725b127ba43b90f94ae0ba31f02
 	public $display_offline_message = '1';
 	public $offline_image = '';
 	public $sitename = 'Jeu de dames';
