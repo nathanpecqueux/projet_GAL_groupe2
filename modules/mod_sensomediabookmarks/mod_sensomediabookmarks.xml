@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="module" method="upgrade">
+	<name>Sensomedia Social Bookmarks</name>
+	<author>Fred Oliver</author>
+	<creationDate>2016-05-20</creationDate>
+	<copyright>Copyright (c)2012-2016 Sensomedia</copyright>
+	<license>GNU GPL v3 or later</license>
+	<authorEmail>contact@sensomedia.com</authorEmail>
+	<authorUrl>www.sensomedia.com</authorUrl>
+	<version>3.4.2</version>
+	<description><![CDATA[
+		<h2>Thank you for using the module Sensomedia Social Bookmarks</h2>
+		<p>Please feel free to contact us to report bugs : contact@sensomedia.com</p>
+	]]></description>
+	<files>
+		<filename module="mod_sensomediabookmarks">mod_sensomediabookmarks.php</filename>
+		<folder>tmpl</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>fonts</folder>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_sensomediabookmarks.xml</filename>
+	</files>
+	<languages folder="languages">
+		<language tag="en-GB">en-GB.mod_sensomediabookmarks.ini</language>
+		<language tag="en-GB">en-GB.mod_sensomediabookmarks.sys.ini</language>
+		<language tag="fr-FR">fr-FR.mod_sensomediabookmarks.ini</language>
+		<language tag="fr-FR">fr-FR.mod_sensomediabookmarks.sys.ini</language>
+	</languages>
+	<updateservers>
+		<server type="extension" priority="1" name="Sensomedia Social Bookmarks Updates">http://www.sensomedia.com/update1.xml</server>
+	</updateservers>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				
+				<field
+					name="align"
+					type="list"
+					default="left"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_ALIGN_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_ALIGN_DESC">
+					<option value="left">MOD_SENSOMEDIABOOKMARKS_FIELD_ALIGN_LEFT</option>
+					<option value="center">MOD_SENSOMEDIABOOKMARKS_FIELD_ALIGN_CENTER</option>
+					<option value="right">MOD_SENSOMEDIABOOKMARKS_FIELD_ALIGN_RIGHT</option>
+				</field>
+				<field
+					name="btnsize"
+					type="text"
+					default="32"
+					label="MOD_SENSOMEDIABBOKMARKS_FIELD_BUTTONSIZE_LABEL"
+					description="MOD_SENSOMEDIABBOKMARKS_FIELD_BUTTONSIZE_DESC" />
+				<field
+					name="roundcorners"
+					type="text"
+					default="0"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_ROUNDCORNERS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_ROUNDCORNERS_DESC" />
+				<field
+					name="url_facebook"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_DESC" />
+				<field
+					name="url_twitter"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TWITTER_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TWITTER_DESC" />
+				<field
+					name="url_googleplus"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEPLUS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEPLUS_DESC" />
+				<field
+					name="url_linkedin"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LINKEDIN_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LINKEDIN_DESC" />
+				<field
+					name="url_viadeo"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_VIADEO_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_VIADEO_DESC" />
+				<field
+					name="url_flickr"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_FLICKR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_FLICKR_DESC" />
+				<field
+					name="url_instagram"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_INSTAGRAM_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_INSTAGRAM_DESC" />
+				<field
+					name="url_pinterest"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_PINTEREST_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_PINTEREST_DESC" />
+				<field
+					name="url_scoopit"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_SCOOPIT_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_SCOOPIT_DESC" />
+				<field
+					name="url_myspace"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_MYSPACE_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_MYSPACE_DESC" />
+				<field
+					name="url_digg"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DIGG_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DIGG_DESC" />
+				<field
+					name="url_delicious"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DELICIOUS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DELICIOUS_DESC" />
+				<field
+					name="url_stumbleupon"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_STUMBLEUPON_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_STUMBLEUPON_DESC" />
+				<field
+					name="url_reddit"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_REDDIT_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_REDDIT_DESC" />
+				<field
+					name="url_newsvine"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_NEWSVINE_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_NEWSVINE_DESC" />
+				<field
+					name="url_technorati"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TECHNORATI_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TECHNORATI_DESC" />
+				<field
+					name="url_soundcloud"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_SOUNDCLOUD_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_SOUNDCLOUD_DESC" />
+				<field
+					name="url_youtube"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_YOUTUBE_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_YOUTUBE_DESC" />
+				<field
+					name="url_dailymotion"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DAILYMOTION_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DAILYMOTION_DESC" />
+				<field
+					name="url_googlemaps"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEMAPS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEMAPS_DESC" />
+				<field
+					name="url_email"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_EMAIL_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_EMAIL_DESC" />
+				<field
+					name="url_rss"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_RSS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_RSS_DESC" />
+			</fieldset>
+			<fieldset name="colors">
+				<field
+					name="bgcolor"
+					type="color"
+					default="#2a2a2a"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_BGCOLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_BGCOLOR_DESC" />
+				<field
+					name="iconscolor"
+					type="list"
+					default="white"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_DESC">
+					<option value="white">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_WHITE</option>
+					<option value="grey">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_GREY</option>
+					<option value="black">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_BLACK</option>
+				</field>
+				<field
+					name="iconshcolor"
+					type="list"
+					default="white"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSHCOLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSHCOLOR_DESC">
+					<option value="white">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_WHITE</option>
+					<option value="grey">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_GREY</option>
+					<option value="black">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_BLACK</option>
+				</field>
+				<field
+					name="color_facebook"
+					type="color"
+					default="#3b5997"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_COLOR_DESC" />
+				<field
+					name="color_twitter"
+					type="color"
+					default="#33ccff"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TWITTER_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TWITTER_COLOR_DESC" />
+				<field
+					name="color_googleplus"
+					type="color"
+					default="#d34331"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEPLUS_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEPLU_COLORS_DESC" />
+				<field
+					name="color_linkedin"
+					type="color"
+					default="#0274b3"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LINKEDIN_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LINKEDIN_COLOR_DESC" />
+				<field
+					name="color_viadeo"
+					type="color"
+					default="#f4982b"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_VIADEO_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_VIADEO_COLOR_DESC" />
+				<field
+					name="color_flickr"
+					type="color"
+					default="#ff0084"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_FLICKR_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_FLICKR_COLOR_DESC" />
+				<field
+					name="color_innstagram"
+					type="color"
+					default="#2e5d85"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_INSTAGRAM_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_INSTAGRAM_COLOR_DESC" />
+				<field
+					name="color_pinterest"
+					type="color"
+					default="#cc2127"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_PINTEREST_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_PINTEREST_COLOR_DESC" />
+				<field
+					name="color_scoopit"
+					type="color"
+					default="#90d303"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_SCOOPIT_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_SCOOPIT_COLOR_DESC" />
+				<field
+					name="color_myspace"
+					type="color"
+					default="#003399"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_MYSPACE_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_MYSPACE_COLOR_DESC" />
+				<field
+					name="color_digg"
+					type="color"
+					default="#1b5791"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DIGG_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DIGG_COLOR_DESC" />
+				<field
+					name="color_delicious"
+					type="color"
+					default="#0000ff"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DELICIOUS_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DELICIOUS_COLOR_DESC" />
+				<field
+					name="color_stumbleupon"
+					type="color"
+					default="#eb4823"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_STUMBLEUPON_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_STUMBLEUPON_COLOR_DESC" />
+				<field
+					name="color_reddit"
+					type="color"
+					default="#cee3f8"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_REDDIT_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_REDDIT_COLOR_DESC" />
+				<field
+					name="color_newsvine"
+					type="color"
+					default="#005221"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_NEWSVINE_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_NEWSVINE_COLOR_DESC" />
+				<field
+					name="color_technorati"
+					type="color"
+					default="#3bb001"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TECHNORATI_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TECHNORATI_COLOR_DESC" />
+				<field
+					name="color_soundcloud"
+					type="color"
+					default="#ff5100"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_SOUNDCLOUD_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_SOUNDCLOUD_COLOR_DESC" />
+				<field
+					name="color_youtube"
+					type="color"
+					default="#d52423"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_YOUTUBE_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_YOUTUBE_COLOR_DESC" />
+				<field
+					name="color_dailymotion"
+					type="color"
+					default="#005377"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_DAILYMOTION_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_DAILYMOTION_COLOR_DESC" />
+				<field
+					name="color_googlemaps"
+					type="color"
+					default="#f7584d"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEMAPS_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_GOOGLEMAPS_COLOR_DESC" />
+				<field
+					name="color_email"
+					type="color"
+					default="#6a91ac"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_EMAIL_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_EMAIL_COLOR_DESC" />
+				<field
+					name="color_rss"
+					type="color"
+					default="#ff9900"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_RSS_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_RSS_COLOR_DESC" />
+			</fieldset>
+			<fieldset
+				name="likebox">
+				<field
+					name="likebox"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_DESC" />
+				<field
+					name="facebook_lang"
+					type="text"
+					default="en_US"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_LANG_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_FACEBOOK_LANG_DESC" />
+				<field
+					name="likeboxtext"
+					type="text"
+					default="Like me"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_TEXT_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_TEXT_DESC" />
+				<field
+					name="likeboxcolor"
+					type="color"
+					default="#3b5997"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLOR_DESC" />
+				<field
+					name="likeboxbg"
+					type="color"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_BG_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_BG_DESC" />
+				<field
+					name="likeboxiconcolor"
+					type="list"
+					default="white"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_ICONCOLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_ICONCOLOR_DESC">
+					<option value="white">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_WHITE</option>
+					<option value="grey">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_GREY</option>
+					<option value="black">MOD_SENSOMEDIABOOKMARKS_FIELD_ICONSCOLOR_BLACK</option>
+					</field>
+				<field
+					name="likeboxcolorscheme"
+					type="list"
+					default="light"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLORSCHEME_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLORSCHEME_DESC">
+					<option value="light">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLORSCHEME_LIGHT</option>
+					<option value="dark">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_COLORSCHEME_DARK</option>
+				</field>
+				<field
+					name="likeboxposition"
+					type="list"
+					default="after"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_DESC">
+					<option value="after">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_AFTER</option>
+					<option value="before">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_BEFORE</option>
+					<option value="above">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_ABOVE</option>
+					<option value="below">MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_POSITION_BELOW</option>
+				</field>
+				<field
+					name="likeboxsize"
+					type="text"
+					default="132"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_SIZE_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_SIZE_DESC" />
+				<field
+					name="likeboxoffset"
+					type="text"
+					default="-28px 0 0 -60px"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_OFFSET_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_LIKEBOX_OFFSET_DESC" />
+			</fieldset>
+			<fieldset
+				name="customtext">
+				<field
+					name="text"
+					type="text"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_DESC" />
+				<field
+					name="textformat"
+					type="list"
+					default="h2"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_FORMAT_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_FORMAT_DESC">
+					<option value="p">p</option>
+					<option value="div">div</option>
+					<option value="h1">h1</option>
+					<option value="h2">h2</option>
+					<option value="h3">h3</option>
+					<option value="h4">h4</option>
+				</field>
+				<field
+					name="textcolor"
+					type="color"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_COLOR_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_COLOR_DESC" />
+				<field
+					name="textposition"
+					type="list"
+					default="before"
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_DESC">
+					<option value="before">MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_BEFORE</option>
+					<option value="after">MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_AFTER</option>
+					<option value="above">MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_ABOVE</option>
+					<option value="below">MOD_SENSOMEDIABOOKMARKS_FIELD_TEXT_POSITION_BELOW</option>
+				</field>			
+			</fieldset>
+			<fieldset
+				name="advanced">
+				<field
+					name="jqueryload"
+					type="list"
+					default="1"
+					label="MOD_SENSOMEDIABBOKMARKS_FIELD_LOADJQUERY_LABEL"
+					description="MOD_SENSOMEDIABBOKMARKS_FIELD_LOADJQUERY_DESC">
+					<option value="1">MOD_SENSOMEDIABOOKMARKS_YES</option>
+					<option value="0">MOD_SENSOMEDIABOOKMARKS_NO</option>
+				</field>
+				<field
+					name="customcss"
+					type="textarea"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_CUSTOMCSS_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_CUSTOMCSS_DESC" />
+				<field
+					name="customcsshover"
+					type="textarea"
+					default=""
+					label="MOD_SENSOMEDIABOOKMARKS_FIELD_CUSTOMCSSHOVER_LABEL"
+					description="MOD_SENSOMEDIABOOKMARKS_FIELD_CUSTOMCSSHOVER_DESC" />
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="cache"
+					type="list"
+					default="0"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

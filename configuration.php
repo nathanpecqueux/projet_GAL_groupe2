@@ -1,6 +1,6 @@
 <?php
 class JConfig {
-	public $offline = '1';
+	public $offline = '0';
 	public $offline_message = 'Ce site est en maintenance.<br /> Merci de revenir ultérieurement.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
@@ -44,7 +44,7 @@ class JConfig {
 	public $cache_handler = 'file';
 	public $cachetime = '15';
 	public $cache_platformprefix = '0';
-	public $MetaDesc = '';
+	public $MetaDesc = 'Jeu de dames';
 	public $MetaKeys = '';
 	public $MetaTitle = '1';
 	public $MetaAuthor = '1';
@@ -60,4 +60,34 @@ class JConfig {
 	public $tmp_path = '/var/www/html/site_projet/projet_GAL_groupe2/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
+	public $memcache_persist = '1';
+	public $memcache_compress = '0';
+	public $memcache_server_host = 'localhost';
+	public $memcache_server_port = '11211';
+	public $memcached_persist = '1';
+	public $memcached_compress = '0';
+	public $memcached_server_host = 'localhost';
+	public $memcached_server_port = '11211';
+	public $redis_persist = '1';
+	public $redis_server_host = 'localhost';
+	public $redis_server_port = '6379';
+	public $redis_server_auth = '';
+	public $redis_server_db = '0';
+	public $proxy_enable = '0';
+	public $proxy_host = '';
+	public $proxy_port = '';
+	public $proxy_user = '';
+	public $proxy_pass = '';
+	public $massmailoff = '0';
+	public $MetaRights = '';
+	public $sitename_pagetitles = '0';
+	public $force_ssl = '0';
+	public $session_memcache_server_host = 'localhost';
+	public $session_memcache_server_port = '11211';
+	public $session_memcached_server_host = 'localhost';
+	public $session_memcached_server_port = '11211';
+	public $frontediting = '1';
+	public $cookie_domain = '';
+	public $cookie_path = '';
+	public $asset_id = '1';
 }

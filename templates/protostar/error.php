@@ -137,17 +137,16 @@ else
 			<div class="row-fluid">
 				<div id="content" class="span12">
 					<!-- Begin Content -->
-					<h1 class="page-header"><?php echo JText::_('JERROR_LAYOUT_PAGE_NOT_FOUND'); ?></h1>
+					<h1 class="page-header">Erreur de connexion</h1>
 					<div class="well">
 						<div class="row-fluid">
 							<div class="span6">
 								<p><strong><?php echo JText::_('JERROR_LAYOUT_ERROR_HAS_OCCURRED_WHILE_PROCESSING_YOUR_REQUEST'); ?></strong></p>
 								<p><?php echo JText::_('JERROR_LAYOUT_NOT_ABLE_TO_VISIT'); ?></p>
 								<ul>
-									<li><?php echo JText::_('JERROR_LAYOUT_AN_OUT_OF_DATE_BOOKMARK_FAVOURITE'); ?></li>
-									<li><?php echo JText::_('JERROR_LAYOUT_MIS_TYPED_ADDRESS'); ?></li>
-									<li><?php echo JText::_('JERROR_LAYOUT_SEARCH_ENGINE_OUT_OF_DATE_LISTING'); ?></li>
-									<li><?php echo JText::_('JERROR_LAYOUT_YOU_HAVE_NO_ACCESS_TO_THIS_PAGE'); ?></li>
+									<li>Erreur dans l'identifiant</li>
+									<li>Erreur dans le mot de passe</li>
+									
 								</ul>
 							</div>
 							<div class="span6">
@@ -161,10 +160,6 @@ else
 							</div>
 						</div>
 						<hr />
-						<p><?php echo JText::_('JERROR_LAYOUT_PLEASE_CONTACT_THE_SYSTEM_ADMINISTRATOR'); ?></p>
-						<blockquote>
-							<span class="label label-inverse"><?php echo $this->error->getCode(); ?></span> <?php echo htmlspecialchars($this->error->getMessage(), ENT_QUOTES, 'UTF-8');?>
-						</blockquote>
 						<?php if ($this->debug) : ?>
 							<div>
 								<?php echo $this->renderBacktrace(); ?>
