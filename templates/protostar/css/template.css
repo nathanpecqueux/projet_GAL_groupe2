@@ -7673,3 +7673,23 @@ body.modal-open {
 li {
 	word-wrap: break-word;
 }
+
+
+tr:nth-child(odd) td:nth-child(odd), tr:nth-child(even) td:nth-child(even) {
+	background: #DEB887;
+}
+
+.styleWhiteMarble{
+	background-image: url('billeBlanche.png');
+	background-size: 55px 50px;
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+.styleBlackMarble{
+	background-image: url('billeNoire.png');
+}
+
+
+
+
