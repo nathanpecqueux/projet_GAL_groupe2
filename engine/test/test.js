@@ -31,16 +31,12 @@ DameTestCase.prototype.testActualPlayer = function(){
 };
 
 
-//DEUX FONCTIONS PAREIL ?
 DameTestCase.prototype.testListePion = function(){
     engine.tokenPlayer();
     var tokenWhite = engine.getPlayerToken("white");
     assertTrue(tokenWhite[0][0]=="10");
 };
 
-DameTestCase.prototype.testListePion2 = function(){
-    engine.tokenPlayer();
-};
 
 DameTestCase.prototype.testCoupPossible = function(){
     engine.movePossible();
@@ -68,7 +64,6 @@ DameTestCase.prototype.testMove = function(){
     engine.move("50","40");
 };
 
-//Joueur blanc attaque joueur noir
 DameTestCase.prototype.testAttackFront = function(){
     engine.changePlayer();
     engine.tokenPlayer();
@@ -76,7 +71,7 @@ DameTestCase.prototype.testAttackFront = function(){
     engine.moveCapture("30","50");
     assertTrue(engine.getColor("40")==0);
 };
-//joueur noir bouge un pion, puis joueur blanc attaque
+
 DameTestCase.prototype.testAttackLeft = function(){
     engine.initBoard();
     //JBlanc avance
@@ -104,7 +99,6 @@ DameTestCase.prototype.testAttackLeft = function(){
     assertTrue(engine.getColor("40")==2);
 };
 
-//Le noir capture de 53 a 51, le pion blanc meurt
 DameTestCase.prototype.testAttackRight = function(){
     engine.initBoard();
     //JBlanc avance
@@ -130,10 +124,55 @@ DameTestCase.prototype.testAttackRight = function(){
 
     assertTrue(engine.getColor("43")==0);
     assertTrue(engine.getColor("44")==2);
+    
+
+    engine.changePlayer();
+    assertTrue(engine.getActualPlayer()=="black");
+
 
 };
 
-DameTestCase.prototype.testChangePlayer = function(){
+DameTestCase.prototype.testHasEnnemy = function(){
+    assertTrue(engine.hasEnemy("44","white")==true);
+};
+
+
+DameTestCase.prototype.testNearestEnnemy = function(){
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("44","43");
+    engine.printBoard();
+    assertTrue(engine.nearestSingleEnemyPawn("43","UP")=="13");
+
     engine.changePlayer();
-    assertTrue(engine.getActualPlayer()=="black");
+    engine.initBoardDernier();
+    engine.tokenPlayer();
+    engine.movePossible();
+
+    assertTrue(engine.nearestSingleEnemyPawn("43","UP")==-1);
+    assertTrue(engine.nearestSingleEnemyPawn("43","RIGHT")=="46");
+    assertTrue(engine.nearestSingleEnemyPawn("43","LEFT")=="42");
+
+};
+
+DameTestCase.prototype.testBecomeQueen = function(){
+    engine.initBoardTestQueen();
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("60","70");
+    assertTrue(engine.getColor("70")==3);
+};
+
+DameTestCase.prototype.testMoveQueen = function(){
+    engine.moveCapture("70","77");
+    assertTrue(engine.getColor("70")==0);
+    assertTrue(engine.getColor("77")==3);
+
+};
+
+DameTestCase.prototype.testCaptureQueen = function(){
+    engine.moveCapture("77","27");
+    assertTrue(engine.getColor("77")==0);
+    assertTrue(engine.getColor("27")==3);
+    assertTrue(engine.getColor("47")==0);
 };
