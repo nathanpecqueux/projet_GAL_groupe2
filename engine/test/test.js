@@ -110,7 +110,7 @@ DameTestCase.prototype.testAttackRight = function(){
     //JBlanc avance
     engine.tokenPlayer();
     engine.movePossible();
-    engine.moveCapture("21","31");
+    engine.moveCapture("23","33");
     //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
@@ -120,22 +120,16 @@ DameTestCase.prototype.testAttackRight = function(){
     engine.changePlayer();
     engine.tokenPlayer();
     engine.movePossible();
-    engine.moveCapture("31","41");
+    engine.moveCapture("33","43");
     //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
     engine.movePossible();
-    engine.moveCapture("72","62");
-    engine.changePlayer();
-    //JBLANC CAPTURE
-    engine.changePlayer();
-    engine.tokenPlayer();
-    engine.movePossible();
-    engine.moveCapture("41","43");
+    engine.moveCapture("42","44");
     engine.changePlayer();
 
-    assertTrue(engine.getColor("42")==0);
-    assertTrue(engine.getColor("43")==1);
+    assertTrue(engine.getColor("43")==0);
+    assertTrue(engine.getColor("44")==2);
 
 };
 
