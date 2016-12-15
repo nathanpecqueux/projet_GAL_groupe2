@@ -141,13 +141,9 @@ DameTestCase.prototype.testNearestEnnemy = function(){
     engine.tokenPlayer();
     engine.movePossible();
     engine.moveCapture("44","43");
-    engine.printBoard();
     assertTrue(engine.nearestSingleEnemyPawn("43","UP")=="13");
 
-    engine.changePlayer();
     engine.initBoardDernier();
-    engine.tokenPlayer();
-    engine.movePossible();
 
     assertTrue(engine.nearestSingleEnemyPawn("43","UP")==-1);
     assertTrue(engine.nearestSingleEnemyPawn("43","RIGHT")=="46");
@@ -162,7 +158,7 @@ DameTestCase.prototype.testBecomeQueen = function(){
     engine.moveCapture("60","70");
     assertTrue(engine.getColor("70")==3);
 };
-
+/*
 DameTestCase.prototype.testMoveQueen = function(){
     engine.moveCapture("70","77");
     assertTrue(engine.getColor("70")==0);
@@ -176,3 +172,4 @@ DameTestCase.prototype.testCaptureQueen = function(){
     assertTrue(engine.getColor("27")==3);
     assertTrue(engine.getColor("47")==0);
 };
+    */
