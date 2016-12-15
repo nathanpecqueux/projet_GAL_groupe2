@@ -5,7 +5,7 @@ class JConfig {
 	public $display_offline_message = '1';
 	public $offline_image = '';
 	public $sitename = 'Jeu de dames';
-	public $editor = 'tinymce';
+	public $editor = 'none';
 	public $captcha = '0';
 	public $list_limit = '20';
 	public $access = '1';
