@@ -75,36 +75,71 @@ DameTestCase.prototype.testAttackFront = function(){
     engine.movePossible();
     engine.moveCapture("30","50");
     assertTrue(engine.getColor("40")==0);
-    engine.printBoard();
 };
 //joueur noir bouge un pion, puis joueur blanc attaque
-DameTestCase.prototype.testAttackRight = function(){
-    //on libere la place pour le joueur blanc
+DameTestCase.prototype.testAttackLeft = function(){
+    engine.initBoard();
+    //JBlanc avance
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("21","31");
+    //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
     engine.movePossible();
-    engine.move("52","42");
-    //on prend le pion noir
+    engine.moveCapture("52","42");
+    //JBlanc avance
     engine.changePlayer();
     engine.tokenPlayer();
     engine.movePossible();
-    engine.moveCapture("50","52");
-    //on test si pion noir meurt
-    assertTrue(engine.getColor("51")==0);
-    engine.printBoard();
+    engine.moveCapture("31","41");
+    //JNoir avance
+    engine.changePlayer();
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("42","40");
+    engine.changePlayer();
+
+    assertTrue(engine.getColor("41")==0);
+    assertTrue(engine.getColor("40")==2);
 };
 
 //Le noir capture de 53 a 51, le pion blanc meurt
-DameTestCase.prototype.testAttackLeft = function(){
+DameTestCase.prototype.testAttackRight = function(){
+    engine.initBoard();
+    //JBlanc avance
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("21","31");
+    //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
     engine.movePossible();
-    engine.moveCapture("53","51");
-    assertTrue(engine.getColor("52")==0);
-    engine.printBoard();
+    engine.moveCapture("52","42");
+    //JBlanc avance
+    engine.changePlayer();
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("31","41");
+    //JNoir avance
+    engine.changePlayer();
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("72","62");
+    engine.changePlayer();
+    //JBLANC CAPTURE
+    engine.changePlayer();
+    engine.tokenPlayer();
+    engine.movePossible();
+    engine.moveCapture("41","43");
+    engine.changePlayer();
+
+    assertTrue(engine.getColor("42")==0);
+    assertTrue(engine.getColor("43")==1);
 
 };
 
 DameTestCase.prototype.testChangePlayer = function(){
-    assertTrue(engine.changePlayer()=="black");
+    engine.changePlayer();
+    assertTrue(engine.getActualPlayer()=="black");
 };
