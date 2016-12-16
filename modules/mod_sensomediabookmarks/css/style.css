@@ -1,0 +1,262 @@
+/**
+ * @package	   Module Sensomedia Social Bookmarks for Joomla! 2.5 and later
+ * @version	   3.4.2
+ * @author	   Fred Oliver
+ * @copyright  Copyright (c)2012-2016 Sensomedia
+ * @license    GNU General Public License version 3, or later
+**/
+
+@font-face {
+	font-family: 'FacebookLetterFaces-Regular';
+	src: url('../fonts/FacebookLetterFaces-Regular.eot?#iefix') format('embedded-opentype'),  url('../fonts/FacebookLetterFaces-Regular.woff') format('woff'), url('../fonts/FacebookLetterFaces-Regular.ttf')  format('truetype'), url('../fonts/FacebookLetterFaces-Regular.svg#FacebookLetterFaces-Regular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.facebookletter { position:relative; font-family:'FacebookLetterFaces-Regular'; font-size:18px; }
+.sensomedia_socialicons_white .facebookletter { color:#fff; }
+.sensomedia_socialicons_grey .facebookletter { color:#888; }
+.sensomedia_socialicons_black .facebookletter { color:#000; }
+
+.sensomediabookmarks p,
+.sensomediabookmarks div,
+.sensomediabookmarks h1,
+.sensomediabookmarks h2,
+.sensomediabookmarks h3 {
+	 vertical-align:middle;
+}
+ 
+.sensomediabookmarks h1,
+.sensomediabookmarks h2,
+.sensomediabookmarks h3 { margin:0px; }
+ 
+ul.sensomedia_socialicons { margin:0; padding:0; vertical-align:middle; }
+ul.sensomedia_socialicons li { 
+	vertical-align:middle;
+	display:inline-block;
+	margin:1px;
+	padding:0;
+	list-style:none;
+	background-image:none;
+	overflow:hidden; 
+}
+
+ul.sensomedia_socialicons li a { 
+	 display:block;
+	 margin:0;
+	 padding:0;
+	 transition:all 0.2s ease-in-out;
+	 background-position:50% 50%;
+	 background-repeat:no-repeat;
+ }
+ul.sensomedia_socialicons li:before { content:none !important; }
+
+.sensomedia_socialicons_left { text-align:left; margin-bottom:15px; }
+.sensomedia_socialicons_center { text-align:center; margin-bottom:15px; }
+.sensomedia_socialicons_right { text-align:right; margin-bottom:15px; }
+
+ul.sensomedia_socialicons li a span {
+	display:block;
+	position:relative;
+	background-image:url(../images/sprite.png);
+	background-repeat:no-repeat;
+	width:32px;
+	height:32px;
+}
+
+/* dailymotion  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_dailymotion a span { background-position:0px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_dailymotion a span { background-position:0px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_dailymotion a span { background-position:0px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_dailymotion a:hover span { background-position:0px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_dailymotion a:hover span { background-position:0px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_dailymotion a:hover span { background-position:0px -64px; }
+
+/* delicious  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_delicious a span { background-position:-32px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_delicious a span { background-position:-32px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_delicious a span { background-position:-32px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_delicious a:hover span { background-position:-32px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_delicious a:hover span { background-position:-32px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_delicious a:hover span { background-position:-32px -64px; }
+
+/* digg  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_digg a span { background-position:-64px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_digg a span { background-position:-64px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_digg a span { background-position:-64px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_digg a:hover span { background-position:-64px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_digg a:hover span { background-position:-64px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_digg a:hover span { background-position:-64px -64px; }
+
+/* email  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_email a span { background-position:-96px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_email a span { background-position:-96px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_email a span { background-position:-96px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_email a:hover span { background-position:-96px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_email a:hover span { background-position:-96px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_email a:hover span { background-position:-96px -64px; }
+
+/* google maps  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_googlemaps a span { background-position:-128px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_googlemaps a span { background-position:-128px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_googlemaps a span { background-position:-128px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_googlemaps a:hover span { background-position:-128px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_googlemaps a:hover span { background-position:-128px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_googlemaps a:hover span { background-position:-128px -64px; }
+
+/* facebook */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_facebook a span { background-position:-160px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_facebook a span { background-position:-160px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_facebook a span { background-position:-160px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_facebook a:hover span { background-position:-160px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_facebook a:hover span { background-position:-160px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_facebook a:hover span { background-position:-160px -64px; }
+
+/* google plus */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_googleplus a span { background-position:-192px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_googleplus a span { background-position:-192px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_googleplus a span { background-position:-192px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_googleplus a:hover span { background-position:-192px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_googleplus a:hover span { background-position:-192px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_googleplus a:hover span { background-position:-192px -64px; }
+
+/* linkedin */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_linkedin a span { background-position:-224px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_linkedin a span { background-position:-224px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_linkedin a span { background-position:-224px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_linkedin a:hover span { background-position:-224px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_linkedin a:hover span { background-position:-224px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_linkedin a:hover span { background-position:-224px -64px; }
+
+/* myspace */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_myspace a span { background-position:-256px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_myspace a span { background-position:-256px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_myspace a span { background-position:-256px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_myspace a:hover span { background-position:-256px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_myspace a:hover span { background-position:-256px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_myspace a:hover span { background-position:-256px -64px; }
+
+/* newsvine */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_newsvine a span { background-position:-288px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_newsvine a span { background-position:-288px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_newsvine a span { background-position:-288px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_newsvine a:hover span { background-position:-288px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_newsvine a:hover span { background-position:-288px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_newsvine a:hover span { background-position:-288px -64px; }
+
+/* pinterest */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_pinterest a span { background-position:-320px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_pinterest a span { background-position:-320px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_pinterest a span { background-position:-320px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_pinterest a:hover span { background-position:-320px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_pinterest a:hover span { background-position:-320px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_pinterest a:hover span { background-position:-320px -64px; }
+
+/* reddit  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_reddit a span { background-position:-352px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_reddit a span { background-position:-352px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_reddit a span { background-position:-352px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_reddit a:hover span { background-position:-352px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_reddit a:hover span { background-position:-352px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_reddit a:hover span { background-position:-352px -64px; }
+
+/* rss  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_rss a span { background-position:-384px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_rss a span { background-position:-384px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_rss a span { background-position:-384px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_rss a:hover span { background-position:-384px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_rss a:hover span { background-position:-384px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_rss a:hover span { background-position:-384px -64px; }
+
+/* scoopit  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_scoopit a span { background-position:-416px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_scoopit a span { background-position:-416px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_scoopit a span { background-position:-416px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_scoopit a:hover span { background-position:-416px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_scoopit a:hover span { background-position:-416px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_scoopit a:hover span { background-position:-416px -64px; }
+
+/* soundcloud  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_soundcloud a span { background-position:-448px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_soundcloud a span { background-position:-448px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_soundcloud a span { background-position:-448px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_soundcloud a:hover span { background-position:-448px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_soundcloud a:hover span { background-position:-448px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_soundcloud a:hover span { background-position:-448px -64px; }
+
+/* technorati  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_technorati a span { background-position:-480px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_technorati a span { background-position:-480px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_technorati a span { background-position:-480px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_technorati a:hover span { background-position:-480px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_technorati a:hover span { background-position:-480px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_technorati a:hover span { background-position:-480px -64px; }
+
+/* stumbleupon  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_stumbleupon a span { background-position:-512px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_stumbleupon a span { background-position:-512px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_stumbleupon a span { background-position:-512px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_stumbleupon a:hover span { background-position:-512px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_stumbleupon a:hover span { background-position:-512px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_stumbleupon a:hover span { background-position:-512px -64px; }
+
+/* twitter  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_twitter a span { background-position:-544px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_twitter a span { background-position:-544px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_twitter a span { background-position:-544px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_twitter a:hover span { background-position:-544px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_twitter a:hover span { background-position:-544px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_twitter a:hover span { background-position:-544px -64px; }
+
+/* youtube  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_youtube a span { background-position:-576px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_youtube a span { background-position:-576px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_youtube a span { background-position:-576px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_youtube a:hover span { background-position:-576px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_youtube a:hover span { background-position:-576px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_youtube a:hover span { background-position:-576px -64px; }
+
+/* flickr  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_flickr a span { background-position:-608px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_flickr a span { background-position:-608px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_flickr a span { background-position:-608px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_flickr a:hover span { background-position:-608px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_flickr a:hover span { background-position:-608px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_flickr a:hover span { background-position:-608px -64px; }
+
+/* instagram  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_instagram a span { background-position:-640px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_instagram a span { background-position:-640px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_instagram a span { background-position:-640px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_instagram a:hover span { background-position:-640px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_instagram a:hover span { background-position:-640px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_instagram a:hover span { background-position:-640px -64px; }
+
+/* viadeo  */
+.sensomedia_socialicons_black ul.sensomedia_socialicons li.smsb_icon_viadeo a span { background-position:-672px 0px; }
+.sensomedia_socialicons_white ul.sensomedia_socialicons li.smsb_icon_viadeo a span { background-position:-672px -32px; }
+.sensomedia_socialicons_grey ul.sensomedia_socialicons li.smsb_icon_viadeo a span { background-position:-672px -64px; }
+.sensomedia_socialicons_hblack ul.sensomedia_socialicons li.smsb_icon_viadeo a:hover span { background-position:-672px 0px; }
+.sensomedia_socialicons_hwhite ul.sensomedia_socialicons li.smsb_icon_viadeo a:hover span { background-position:-672px -32px; }
+.sensomedia_socialicons_hgrey ul.sensomedia_socialicons li.smsb_icon_viadeo a:hover span { background-position:-672px -64px; }
+
+
+
+/* like box */
+
+.fb-main {
+	display:inline-block;
+	margin:0px;
+	overflow:hidden;
+}
+
+.fb-panel {
+	position:absolute;
+	margin:0px;
+	background-position: 0px 50%;
+	background-repeat:no-repeat;
+	text-align:center;
+	padding-left:32px;
+	z-index:1;
+}
+
