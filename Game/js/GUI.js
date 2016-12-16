@@ -1,23 +1,16 @@
 "use strict";
 
 var GUI = {
-	PLAYER: {
-		_player: "B",
-		
-		currentPlayer: function() {
-			// this._player = ENGINE.getPlayer();
-		},
-		
-		updateCurrent: function() {
-			this.currentPlayer();
+	PLAYER: {		
+		update: function(currentPlayer) {
 			var player = document.querySelector("#players .currentPlayer");
 			
-			if(this._player == "B") {
+			if(currentPlayer == "B") {
 				player.innerHTML = "Black";
-			} else if (this._player == "W") {
+			} else if (currentPlayer == "W") {
 				player.innerHTML = "White";
 			}
-		}
+		},
 	},
 	
 	BOARD: {
@@ -111,12 +104,15 @@ var GUI = {
 			return move.split("-")[3];
 		},
 		
-		/**
-		 * Initialise le tour pour un joueur
-		 * */
-		addListenersTokens: function(moves) {
+		initTurn: function(moves) {
+			this._moves = moves;
+			this.addListenersTokens();
+		},
+		
+		addListenersTokens: function() {
 			var line, column;
 			var token;
+			var moves = this._moves;
 			for(let move of moves) {
 				line = this.getSrcLine(move);
 				column = this.getSrcColumn(move);
@@ -211,7 +207,7 @@ var GUI = {
 				}
 				
 				GUI.BOARD.removeListenersTokens();
-				// ENGINE.doMove(move)
+				// GAME.MANAGER.doPlayMovementgit status(2, move);
 			},
 			
 			doDisplacement: function() {
@@ -231,19 +227,18 @@ var GUI = {
 }
 
 function main() {
-	GUI.PLAYER.updateCurrent();
 	GUI.BOARD.__init();
 	var queen = GUI.BOARD.buildToken("queen","black");
 	GUI.BOARD.addToken(queen,3,3);
 	var token = GUI.BOARD.buildToken("pawn","white");
 	GUI.BOARD.addToken(token,3,2);
 	
-	GUI.BOARD._moves = [
+	var moves = [
 		"D-20-30",
 		"C-33-31-32",
 		"C-22-42-32","D-33-34","D-33-43","D-33-35","D-33-36","D-33-37","C-33-30-32"
 	];
-	GUI.BOARD.addListenersTokens(GUI.BOARD._moves);
+	GUI.BOARD.initTurn(moves);
 }
 
 main();
