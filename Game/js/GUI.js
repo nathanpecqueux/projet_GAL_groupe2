@@ -5,9 +5,9 @@ var GUI = {
 		update: function(currentPlayer) {
 			var player = document.querySelector("#players .currentPlayer");
 			
-			if(currentPlayer == "B") {
+			if(currentPlayer == "black") {
 				player.innerHTML = "Black";
-			} else if (currentPlayer == "W") {
+			} else if (currentPlayer == "white") {
 				player.innerHTML = "White";
 			}
 		},
@@ -225,7 +225,7 @@ var GUI = {
 		}
 	},
 }
-
+/*
 function main() {
 	GUI.BOARD.__init();
 	var queen = GUI.BOARD.buildToken("queen","black");
@@ -241,4 +241,4 @@ function main() {
 	GUI.BOARD.initTurn(moves);
 }
 
-main();
+main();*/

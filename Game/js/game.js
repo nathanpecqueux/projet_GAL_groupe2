@@ -1,23 +1,10 @@
-/**
-turn :
-1 : récupérer joueur courant
-2 
-  2.1 Si HUMAN : ajouter les événements sur chaque pion source
-	Si au clic pion mouvement
-		2.1.1 : retirer tous les events du board
-		2.1.2 : ajouter les events aux cellules sources
-	Sinon (rien)
-  2.2 Si AI : jouer aléatoirement
-3 Fin du tour
-*/
+"use strict";
 
 var GAME = {
 	MANAGER: {
 		__init: function() {
-			Engine.BOARD.__init();
-			Engine.PLAYERS.__init();
+			ENGINE.initBoard();
 			GUI.BOARD.__init();
-			GUI.PLAYERS.__init()
 		},
 		
 		play: function() {
@@ -25,13 +12,13 @@ var GAME = {
 		},
 		
 		newTurn: function() {
-			ENGINE.BOARD.newTurn();
-			var currentPlayer = ENGINE.PLAYERS.currentPlayer();
-			var type = ENGINE.PLAYERS.getType(currentPlayer);
+			ENGINE.changePlayer();
+			var currentPlayer = ENGINE.getActualPlayer();
+			var type = "human";
+
+			GUI.PLAYER.update(currentPlayer);
 			
-			GUI.PLAYERS.update(currentPlayer);
-			
-		git branc	if(type == "human") {
+			if(type == "human") {
 				this.doPlay(1);
 			} else if(type == "AI") {
 				setTimeout(function (){
@@ -43,7 +30,7 @@ var GAME = {
 		doPlay: function(step) {
 			switch(parseInt(step)) {
 				case 1:
-				this.doPlayMovement();
+				this.doPlayMovement(1);
 				break;
 				
 				case 2:
@@ -51,15 +38,17 @@ var GAME = {
 				break;
 			}
 		},
-		
+		/*
 		doPlayAI: function() {
 			
 		},
-		
+		*/
 		doPlayMovement: function(step, move) {
 			switch(parseInt(step)) {
 				case 1:
-				GUI.EVENTS.BOARD.initTurn();
+				var moves = ENGINE.movePossFormat();
+				console.log("moves : " + moves);
+				//GUI.BOARD.initTurn(moves);
 				break;
 				
 				case 2:
@@ -68,7 +57,7 @@ var GAME = {
 				break;
 			}
 		},
-		
+		/*
 		endGame: function() {			
 			if(ENGINE.BOARD.victory() != 0) {
 				GUI.endGame();
@@ -76,5 +65,6 @@ var GAME = {
 				this.newTurn();
 			}
 		},
+		* */
 	},
 } 

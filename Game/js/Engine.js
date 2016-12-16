@@ -2,28 +2,20 @@
  * Created by nathan on 13/12/16.
  */
 
-'use strict';
+"use strict";
 
-/*
- 1 : token white
- 2 : token black
- 3 : queen white
- 4 : black queen
- */
-
-var Engine;
-Engine = function () {
+var ENGINE = {
     //var board = new Array(8);
-    var actualPlayer;
-    var tokenWhite = [];
-    var tokenBlack = [];
-    var moveWhitePoss;
-    var moveBlackPoss;
-    var movePossFormatWhite;
-    var movePossFormatBlack;
+    actualPlayer: undefined,
+	tokenWhite: [],
+    tokenBlack: [],
+    tokenWhite: undefined,
+    moveBlackPoss: undefined,
+    movePossFormatWhite: undefined,
+    movePossFormatBlack: undefined,
 
-    this.initBoard = function () {
-        actualPlayer = "white";
+    initBoard: function () {
+        actualPlayer: "black";
         this.board =
             [
                 [0, 0, 0, 0, 0, 0, 0, 0],
@@ -36,10 +28,10 @@ Engine = function () {
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
         return this.board;
-    };
+    },
 
-    this.initBoardTestQueen = function () {
-        actualPlayer = "white";
+    initBoardTestQueen: function () {
+        actualPlayer: "white";
         this.board =
             [
                 [0, 0, 0, 0, 0, 0, 0, 0],
@@ -52,10 +44,10 @@ Engine = function () {
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
         return this.board;
-    };
+    },
 
-    this.initBoardDernier = function () {
-        actualPlayer = "white";
+    initBoardDernier: function () {
+        actualPlayer: "white";
         this.board =
             [
                 [0, 0, 0, 2, 0, 0, 0, 0],
@@ -68,10 +60,10 @@ Engine = function () {
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
         return this.board;
-    };
+    },
 
-    this.initWin = function () {
-        actualPlayer = "white";
+    initWin: function () {
+        actualPlayer: "white";
         this.board =
             [
                 [0, 0, 0, 0, 0, 0, 0, 0],
@@ -80,20 +72,20 @@ Engine = function () {
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 3 , 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
         return this.board;
-    };
+    },
 
-    this.printBoard = function () {
+    printBoard: function () {
      for (var line = 0; line < 8; line++) {
      console.log(this.board[line]);
      }
      console.log("");
-     };
+     },
 
-    this.tokenNumber = function (color) {
+    tokenNumber: function (color) {
         var count = 0;
         for (var line = 0; line < 8; line++) {
             for (var column = 0; column < 8; column++) {
@@ -109,25 +101,25 @@ Engine = function () {
             }
         }
         return count;
-    };
+    },
 
-    this.getActualPlayer = function () {
-        return actualPlayer;
-    };
+    getActualPlayer: function () {
+        return this.actualPlayer;
+    },
 
-    this.changePlayer = function () {
-        if (actualPlayer == "white") {
-            actualPlayer = "black";
+    changePlayer: function () {
+        if (this.getActualPlayer() == "white") {
+            this.actualPlayer = "black";
         } else {
-            actualPlayer = "white";
+            this.actualPlayer = "white";
         }
-    };
+    },
 
-    this.getColor = function (pos) {
+    getColor: function (pos) {
         return this.board[pos[0]][pos[1]];
-    };
+    },
 
-    this.getForward = function (position) {
+    getForward: function (position) {
         var forward = 0;
         if (this.getColor(position) == 1) {
             forward = parseInt(position[0]) + 1;
@@ -139,27 +131,27 @@ Engine = function () {
         } else {
             return "-1";
         }
-    };
+    },
 
-    this.getRight = function (position) {
+    getRight: function (position) {
         if (position[1] != 7 && this.getColor(position[0] + (parseInt(position[1]) + 1)) == 0) {
             return position[0] + (parseInt(position[1]) + 1);
         } else {
             return "-1";
         }
-    };
+    },
 
-    this.getLeft = function (position) {
+    getLeft: function (position) {
         if (position[1] != 0 && this.getColor(position[0] + (parseInt(position[1]) - 1)) == 0) {
             return position[0] + (parseInt(position[1]) - 1);
         } else {
             return "-1";
         }
-    };
+    },
 
-    this.tokenPlayer = function () {
-        tokenWhite = [];
-        tokenBlack = [];
+    tokenPlayer: function () {
+        this.tokenWhite = [];
+        this.tokenBlack = [];
         for (var line = 0; line < 8; line++) {
             for (var column = 0; column < 8; column++) {
                 if (this.board[line][column] == 1) {
@@ -175,25 +167,25 @@ Engine = function () {
                 }
             }
         }
-    };
+    },
 
-    this.getPlayerToken = function (player) {
+    getPlayerToken: function (player) {
         if (player == "white") {
             return tokenWhite;
         } else {
             return tokenBlack;
         }
-    };
+    },
 
-    this.getPlayerPoss = function (player) {
+    getPlayerPoss: function (player) {
         if (player == "white") {
-            return moveWhitePoss;
+            return this.tokenWhite;
         } else {
-            return moveBlackPoss;
+            return this.moveBlackPoss;
         }
-    };
+    },
 
-    this.getNeighborsEnemy = function (pos) {
+    getNeighborsEnemy: function (pos) {
         var neighborsEnemy = [];
         var line = pos[0];
         var col = pos[1];
@@ -231,72 +223,80 @@ Engine = function () {
             }
         }
         return neighborsEnemy;
-    };
+    },
 
-    this.movePossible = function () {
-        moveWhitePoss = [];
-        moveBlackPoss = [];
-        for (var moveWhite = 0; moveWhite < tokenWhite.length; moveWhite++) {
+    movePossible: function () {
+        this.tokenWhite = [];
+        this.moveBlackPoss = [];
+        for (var moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
             var neighborsEnemyWhite = this.getNeighborsEnemy(tokenWhite[moveWhite][0]);
             if (neighborsEnemyWhite.length > 0) {
-                moveWhitePoss.push(["C", tokenWhite[moveWhite][0], this.getNeighborsEnemy(tokenWhite[moveWhite][0])]);
+                this.this.tokenWhite.push(["C", tokenWhite[moveWhite][0], this.getNeighborsEnemy(tokenWhite[moveWhite][0])]);
             }
         }
-        if (moveWhitePoss.length < 1) {
-            for (moveWhite = 0; moveWhite < tokenWhite.length; moveWhite++) {
-                if (this.getLeft(tokenWhite[moveWhite][0]) != "-1") {
-                    moveWhitePoss.push(["D", tokenWhite[moveWhite][0], this.getLeft(tokenWhite[moveWhite][0])]);
+        if (this.tokenWhite.length < 1) {
+            for (moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
+                if (this.getLeft(this.tokenWhite[moveWhite][0]) != "-1") {
+                    this.this.tokenWhite.push(["D", this.tokenWhite[moveWhite][0], this.getLeft(this.tokenWhite[moveWhite][0])]);
                 }
                 if (this.getRight(tokenWhite[moveWhite][0]) != "-1") {
-                    moveWhitePoss.push(["D", tokenWhite[moveWhite][0], this.getRight(tokenWhite[moveWhite][0])]);
+                    this.tokenWhite.push(["D", this.tokenWhite[moveWhite][0], this.getRight(tokenWhite[moveWhite][0])]);
                 }
                 if (this.getForward(tokenWhite[moveWhite][0]) != "-1") {
-                    moveWhitePoss.push(["D", tokenWhite[moveWhite][0], this.getForward(tokenWhite[moveWhite][0])]);
+                    this.tokenWhite.push(["D", tokenWhite[moveWhite][0], this.getForward(tokenWhite[moveWhite][0])]);
                 }
             }
         }
-        for (var moveBlack = 0; moveBlack < tokenBlack.length; moveBlack++) {
+        for (var moveBlack = 0; moveBlack < this.tokenWhite.length; moveBlack++) {
             var neighborsEnemyBlack = this.getNeighborsEnemy(tokenBlack[moveBlack][0]);
             if (neighborsEnemyBlack.length > 0) {
-                moveBlackPoss.push(["C", tokenBlack[moveBlack][0], this.getNeighborsEnemy(tokenBlack[moveBlack][0])]);
+                this.moveBlackPoss.push(["C", tokenBlack[moveBlack][0], this.getNeighborsEnemy(this.tokenWhite[moveBlack][0])]);
             }
         }
-        if (moveBlackPoss.length < 1) {
-            for (moveBlack = 0; moveBlack < tokenBlack.length; moveBlack++) {
-                if (this.getLeft(tokenBlack[moveBlack][0]) != "-1") {
-                    moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getLeft(tokenBlack[moveBlack][0])]);
+        if (this.moveBlackPoss.length < 1) {
+            for (moveBlack = 0; moveBlack < this.tokenBlack.length; moveBlack++) {
+                if (this.getLeft(this.tokenBlack[moveBlack][0]) != "-1") {
+                    this.moveBlackPoss.push(["D", this.tokenBlack[moveBlack][0], this.getLeft(tokenBlack[moveBlack][0])]);
                 }
                 if (this.getRight(tokenBlack[moveBlack][0]) != "-1") {
-                    moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getRight(tokenBlack[moveBlack][0])]);
+                    this.moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getRight(tokenBlack[moveBlack][0])]);
                 }
                 if (this.getForward(tokenBlack[moveBlack][0]) != "-1") {
-                    moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getForward(tokenBlack[moveBlack][0])]);
+                    this.moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getForward(tokenBlack[moveBlack][0])]);
                 }
             }
         }
-    };
+    },
     
-    this.movePossFormat = function () {
+    movePossFormat: function () {
         this.movePossible();
-        movePossFormatWhite = [];
-        movePossFormatBlack = [];
-        for (var moveWhite=0; moveWhite < moveWhitePoss.length;moveWhite++){
-            movePossFormatWhite.push(moveWhitePoss[moveWhite][0]+"-"+moveWhitePoss[moveWhite][1]+"-"+moveWhitePoss[moveWhite][2]);
+        this.movePossFormatWhite = [];
+        this.movePossFormatBlack = [];
+        for (var moveWhite=0; moveWhite < this.tokenWhite.length; moveWhite++){
+            this.movePossFormatWhite.push(this.this.tokenWhite[moveWhite][0]+"-"+this.this.tokenWhite[moveWhite][1]+"-"+this.this.tokenWhite[moveWhite][2]);
         }
-        for (var moveBlack=0; moveBlack < moveBlackPoss.length;moveBlack++){
-            movePossFormatBlack.push(moveBlackPoss[moveBlack][0]+"-"+moveBlackPoss[moveBlack][1]+"-"+moveBlackPoss[moveBlack][2]);
+        for (var moveBlack=0; moveBlack < this.moveBlackPoss.length;moveBlack++){
+            this.movePossFormatBlack.push(this.moveBlackPoss[moveBlack][0]+"-"+this.moveBlackPoss[moveBlack][1]+"-"+this.moveBlackPoss[moveBlack][2]);
         }
-    };
+        
+        console.log(this.actualPlayer);
+        console.log(movePossFormatBlack);
+        if(this.actualPlayer == "black") {
+			return this.movePossFormatBlack;
+		} else {
+			return this.movePossFormatWhite;
+		}
+    },
     
-    this.hasEnemy = function (pos,color){
+    hasEnemy: function (pos,color){
         if(this.getColor(pos) != "0" && this.getColor(pos) != color){
             return true;
         }else{
             return false;
         }
-    };
+    },
 
-    this.nearestSingleEnemyPawn = function (pos,direction) {
+    nearestSingleEnemyPawn: function (pos,direction) {
         var p;
         var pNext;
         if(direction == "DOWN"){
@@ -336,13 +336,13 @@ Engine = function () {
             }
         }
         return -1;
-    };
+    },
 
-    this.movePossQueen = function () {
+    movePossQueen: function () {
         for (var moveWhite = 0; moveWhite < tokenWhite.length; moveWhite++) {
             var neighborsEnemyWhite = this.getNeighborsEnemy(tokenWhite[moveWhite][0]);
             if (neighborsEnemyWhite.length > 0) {
-                moveWhite.push(["C", tokenWhite[moveWhite][0], this.getNeighborsEnemy(tokenWhite[moveWhite][0])]);
+                moveWhite.push(["C", this.tokenWhite[moveWhite][0], this.getNeighborsEnemy(tokenWhite[moveWhite][0])]);
             }
         }
         if (moveWhite.length < 1) {
@@ -377,20 +377,20 @@ Engine = function () {
                 }
             }
         }
-    };
+    },
 
-    this.captureVertical = function (posBegin, posEnd) {
+    captureVertical: function (posBegin, posEnd) {
         if (actualPlayer == "white") {
-            for (var moveWhite = 0; moveWhite < moveWhitePoss.length; moveWhite++) {
-                if (moveWhitePoss[moveWhite][1] == posBegin && moveWhitePoss[moveWhite][2] == posEnd) {
+            for (var moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
+                if (this.tokenWhite[moveWhite][1] == posBegin && this.tokenWhite[moveWhite][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[(parseInt(posBegin[0]) + parseInt(posEnd[0])) / 2][posBegin[1]] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 1;
                 }
             }
         } else {
-            for (var moveBlack = 0; moveBlack < moveBlackPoss.length; moveBlack++) {
-                if (moveBlackPoss[moveBlack][1] == posBegin && moveBlackPoss[moveBlack][2] == posEnd) {
+            for (var moveBlack = 0; moveBlack < this.moveBlackPoss.length; moveBlack++) {
+                if (this.moveBlackPoss[moveBlack][1] == posBegin && this.moveBlackPoss[moveBlack][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[(parseInt(posBegin[0]) + parseInt(posEnd[0])) / 2][posBegin[1]] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 2;
@@ -398,20 +398,20 @@ Engine = function () {
             }
 
         }
-    };
+    },
 
-    this.captureHorizontal = function (posBegin, posEnd) {
+    captureHorizontal: function (posBegin, posEnd) {
         if (actualPlayer == "white") {
-            for (var moveWhite = 0; moveWhite < moveWhitePoss.length; moveWhite++) {
-                if (moveWhitePoss[moveWhite][1] == posBegin && moveWhitePoss[moveWhite][2] == posEnd) {
+            for (var moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
+                if (this.tokenWhite[moveWhite][1] == posBegin && this.tokenWhite[moveWhite][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[posBegin[0]][(parseInt(posBegin[1]) + parseInt(posEnd[1])) / 2] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 1;
                 }
             }
         } else {
-            for (var moveBlack = 0; moveBlack < moveBlackPoss.length; moveBlack++) {
-                if (moveBlackPoss[moveBlack][1] == posBegin && moveBlackPoss[moveBlack][2] == posEnd) {
+            for (var moveBlack = 0; moveBlack < this.moveBlackPoss.length; moveBlack++) {
+                if (this.moveBlackPoss[moveBlack][1] == posBegin && this.moveBlackPoss[moveBlack][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[posBegin[0]][(parseInt(posBegin[1]) + parseInt(posEnd[1])) / 2] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 2;
@@ -419,39 +419,39 @@ Engine = function () {
             }
 
         }
-    };
+    },
 
-    this.move = function (posBegin, posEnd) {
+    move: function (posBegin, posEnd) {
         if (actualPlayer == "white") {
-            for (var moveWhite = 0; moveWhite < moveWhitePoss.length; moveWhite++) {
-                if (moveWhitePoss[moveWhite][1] == posBegin && moveWhitePoss[moveWhite][2] == posEnd) {
+            for (var moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
+                if (this.tokenWhite[moveWhite][1] == posBegin && this.tokenWhite[moveWhite][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 1;
                 }
             }
         } else {
-            for (var moveBlack = 0; moveBlack < moveBlackPoss.length; moveBlack++) {
-                if (moveBlackPoss[moveBlack][1] == posBegin && moveBlackPoss[moveBlack][2] == posEnd) {
+            for (var moveBlack = 0; moveBlack < this.moveBlackPoss.length; moveBlack++) {
+                if (this.moveBlackPoss[moveBlack][1] == posBegin && this.moveBlackPoss[moveBlack][2] == posEnd) {
                     this.board[posBegin[0]][posBegin[1]] = 0;
                     this.board[posEnd[0]][posEnd[1]] = 2;
                 }
             }
         }
-    };
+    },
 
-    this.moveCapture = function (posBegin, posEnd) {
+    moveCapture: function (posBegin, posEnd) {
         if (this.getColor(posBegin) == "1" || this.getColor(posBegin) == "2") {
             this.moveCaptureToken(posBegin, posEnd);
         } else if (this.getColor(posBegin) == "3" || this.getColor(posBegin) == "4") {
             this.moveCaptureQueen(posBegin, posEnd);
         }
         this.becomeQueen();
-    };
+    },
 
-    this.moveCaptureToken = function (posBegin, posEnd) {
+    moveCaptureToken: function (posBegin, posEnd) {
         if (actualPlayer == "white" && this.getColor(posBegin) == "1") {
-            for (var moveWhite = 0; moveWhite < moveWhitePoss.length; moveWhite++) {
-                if (moveWhitePoss[moveWhite][0] == "D") {
+            for (var moveWhite = 0; moveWhite < this.tokenWhite.length; moveWhite++) {
+                if (this.tokenWhite[moveWhite][0] == "D") {
                     this.move(posBegin, posEnd);
                 } else {
                     if (posBegin[0] != posEnd[0]) {
@@ -462,8 +462,8 @@ Engine = function () {
                 }
             }
         } else if (actualPlayer == "black" && this.getColor(posBegin) == "2") {
-            for (var moveBlack = 0; moveBlack < moveBlackPoss.length; moveBlack++) {
-                if (moveBlackPoss[moveBlack][0] == "D") {
+            for (var moveBlack = 0; moveBlack < this.moveBlackPoss.length; moveBlack++) {
+                if (this.moveBlackPoss[moveBlack][0] == "D") {
                     this.move(posBegin, posEnd);
                 } else {
                     if (posBegin[0] != posEnd[0]) {
@@ -474,13 +474,13 @@ Engine = function () {
                 }
             }
         }
-    };
+    },
 
-    this.moveCaptureQueen = function (posbegin,posEnd) {
+    moveCaptureQueen: function (posbegin,posEnd) {
 
-    };
+    },
 
-    this.becomeQueen = function () {
+    becomeQueen: function () {
         if (actualPlayer == "white") {
             for (var column = 0; column < 8; column++) {
                 if (this.board[7][column] == "1") {
@@ -494,9 +494,9 @@ Engine = function () {
                 }
             }
         }
-    };
+    },
 
-    this.win = function () {
+    win: function () {
         if (this.tokenNumber("white") == "0") {
             return "black";
         } else if (this.tokenNumber("black") == "0") {
@@ -504,5 +504,5 @@ Engine = function () {
         } else {
             return "-1";
         }
-    };
+    },
 };
