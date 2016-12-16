@@ -108,17 +108,17 @@ DameTestCase.prototype.testAttackRight = function(){
     //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
-    engine.movePossFormat();
+    engine.movePossible();
     engine.moveCapture("52","42");
     //JBlanc avance
     engine.changePlayer();
     engine.tokenPlayer();
-    engine.movePossFormat();
+    engine.movePossible();
     engine.moveCapture("33","43");
     //JNoir avance
     engine.changePlayer();
     engine.tokenPlayer();
-    engine.movePossFormat();
+    engine.movePossible();
     engine.moveCapture("42","44");
     engine.changePlayer();
 
@@ -139,7 +139,7 @@ DameTestCase.prototype.testHasEnnemy = function(){
 
 DameTestCase.prototype.testNearestEnnemy = function(){
     engine.tokenPlayer();
-    engine.movePossFormat();
+    engine.movePossible();
     engine.moveCapture("44","43");
     assertTrue(engine.nearestSingleEnemyPawn("43","UP")=="13");
 
@@ -154,10 +154,14 @@ DameTestCase.prototype.testNearestEnnemy = function(){
 DameTestCase.prototype.testBecomeQueen = function(){
     engine.initBoardTestQueen();
     engine.tokenPlayer();
-    engine.movePossFormat();
+    engine.movePossible();
     engine.moveCapture("60","70");
     assertTrue(engine.getColor("70")==3);
+};
 
+DameTestCase.prototype.testWin = function(){
+    engine.initWin();
+    assertTrue(engine.win()=="white");
 };
 /*
 DameTestCase.prototype.testMoveQueen = function(){
@@ -172,5 +176,4 @@ DameTestCase.prototype.testCaptureQueen = function(){
     assertTrue(engine.getColor("77")==0);
     assertTrue(engine.getColor("27")==3);
     assertTrue(engine.getColor("47")==0);
-};
-    */
+};*/
