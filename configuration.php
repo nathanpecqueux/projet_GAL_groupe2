@@ -1,16 +1,11 @@
 <?php
 class JConfig {
-<<<<<<< HEAD
 	public $offline = '0';
-	public $offline_message = 'Ce site est en maintenance.<br /> Merci de revenir ultérieurement.';
-=======
-	public $offline = '1';
 	public $offline_message = 'veuillez entrer votre login et votre mot de passe ';
->>>>>>> 8619ae16770f1725b127ba43b90f94ae0ba31f02
 	public $display_offline_message = '1';
 	public $offline_image = '';
 	public $sitename = 'Jeu de dames';
-	public $editor = 'tinymce';
+	public $editor = 'none';
 	public $captcha = '0';
 	public $list_limit = '20';
 	public $access = '1';
@@ -85,7 +80,7 @@ class JConfig {
 	public $proxy_pass = '';
 	public $massmailoff = '0';
 	public $MetaRights = '';
-	public $sitename_pagetitles = '0';
+	public $sitename_pagetitles = '1';
 	public $force_ssl = '0';
 	public $session_memcache_server_host = 'localhost';
 	public $session_memcache_server_port = '11211';
