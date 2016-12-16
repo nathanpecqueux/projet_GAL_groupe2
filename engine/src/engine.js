@@ -19,6 +19,8 @@ Engine = function () {
     var tokenBlack = [];
     var moveWhitePoss;
     var moveBlackPoss;
+    var movePossFormatWhite;
+    var movePossFormatBlack;
 
     this.initBoard = function () {
         actualPlayer = "white";
@@ -68,6 +70,22 @@ Engine = function () {
         return this.board;
     };
 
+    this.initWin = function () {
+        actualPlayer = "white";
+        this.board =
+            [
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0]
+            ];
+        return this.board;
+    };
+
     this.printBoard = function () {
      for (var line = 0; line < 8; line++) {
      console.log(this.board[line]);
@@ -79,8 +97,14 @@ Engine = function () {
         var count = 0;
         for (var line = 0; line < 8; line++) {
             for (var column = 0; column < 8; column++) {
-                if (this.board[line][column] == color) {
-                    count++;
+                if (color == "white") {
+                    if (this.board[line][column] == "1" || this.board[line][column] == "3") {
+                        count++;
+                    }
+                }else{
+                    if (this.board[line][column] == "2" || this.board[line][column] == "4") {
+                        count++;
+                    }
                 }
             }
         }
@@ -249,6 +273,18 @@ Engine = function () {
                     moveBlackPoss.push(["D", tokenBlack[moveBlack][0], this.getForward(tokenBlack[moveBlack][0])]);
                 }
             }
+        }
+    };
+    
+    this.movePossFormat = function () {
+        this.movePossible();
+        movePossFormatWhite = [];
+        movePossFormatBlack = [];
+        for (var moveWhite=0; moveWhite < moveWhitePoss.length;moveWhite++){
+            movePossFormatWhite.push(moveWhitePoss[moveWhite][0]+"-"+moveWhitePoss[moveWhite][1]+"-"+moveWhitePoss[moveWhite][2]);
+        }
+        for (var moveBlack=0; moveBlack < moveBlackPoss.length;moveBlack++){
+            movePossFormatBlack.push(moveBlackPoss[moveBlack][0]+"-"+moveBlackPoss[moveBlack][1]+"-"+moveBlackPoss[moveBlack][2]);
         }
     };
     
@@ -462,9 +498,9 @@ Engine = function () {
 
     this.win = function () {
         if (this.tokenNumber("white") == "0") {
-            return "white";
-        } else if (this.tokenNumber("black") == "0") {
             return "black";
+        } else if (this.tokenNumber("black") == "0") {
+            return "white";
         } else {
             return "-1";
         }
