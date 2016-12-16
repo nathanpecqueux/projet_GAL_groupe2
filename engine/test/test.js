@@ -158,6 +158,11 @@ DameTestCase.prototype.testBecomeQueen = function(){
     engine.moveCapture("60","70");
     assertTrue(engine.getColor("70")==3);
 };
+
+DameTestCase.prototype.testWin = function(){
+    engine.initWin();
+    assertTrue(engine.win()=="white");
+};
 /*
 DameTestCase.prototype.testMoveQueen = function(){
     engine.moveCapture("70","77");
@@ -171,5 +176,4 @@ DameTestCase.prototype.testCaptureQueen = function(){
     assertTrue(engine.getColor("77")==0);
     assertTrue(engine.getColor("27")==3);
     assertTrue(engine.getColor("47")==0);
-};
-    */
+};*/
