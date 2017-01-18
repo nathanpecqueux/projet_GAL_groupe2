@@ -1,34 +1,39 @@
 "use strict";
 
 var GUI = {
-	PLAYER: {		
-		update: function(currentPlayer) {
+	PLAYER: {
+		_player: "B",
+		
+		currentPlayer: function() {
+			// this._player = ENGINE.getPlayer();
+		},
+		
+		updateCurrent: function() {
+			this.currentPlayer();
 			var player = document.querySelector("#players .currentPlayer");
 			
-			if(currentPlayer == "black") {
+			if(this._player == "B") {
 				player.innerHTML = "Black";
-			} else if (currentPlayer == "white") {
+			} else if (this._player == "W") {
 				player.innerHTML = "White";
 			}
-		},
+		}
 	},
 	
 	BOARD: {
-		_moves: [],
-		
 		__init: function() {
 			var token;
 			for(var l=1 ; l<=2 ; l++) {
 				for(var c=0 ; c<8 ; c++) {
 					token = this.buildToken("P","B");
-					this.addToken(token, l, c);
+					this.addToken(l, c, token);
 				}
 			}
 			
 			for(var l=5 ; l<=6 ; l++) {
 				for(var c=0 ; c<8 ; c++) {
 					token = this.buildToken("P","W");
-					this.addToken(token, l, c);
+					this.addToken(l, c, token);
 				}
 			}
 		},
@@ -47,6 +52,12 @@ var GUI = {
 			return document.querySelector("#board td" + line + column + " div");
 		},
 		
+		addToken: function(line, column, token) {
+			var cell = this.getCell(line, column);
+			
+			cell.appendChild(token);
+		},
+		
 		removeToken: function(line, column) {
 			var token = this.getToken(line, column);
 			token.parentNode.removeChild(token);
@@ -54,20 +65,22 @@ var GUI = {
 		
 		/**
 		 * Fabrique un jeton
+		@param		{string}
+		@param		{string}
+		@return		{div}
 		 * */
-		buildToken: function(type, color) {			
+		buildToken: function(type, color) {
 			var token = document.createElement("div");
 			
-			if(color == "B" || color=="black") {
+			if (color == "B" || color == "black") {
 				token.dataset.color = "black";
-			} else if (color == "W" || color=="white") {
+			} else if (color == "W" || color == "white") {
 				token.dataset.color = "white";
-				
 			}
 			
 			if (type == "P" || type=="pawn") {
 				token.dataset.type = "pawn";
-			} else if (type == "Q" || type=="queen") {
+			} else if (type == "Q" || type == "queen") {
 				token.dataset.type = "queen";
 			}
 			
@@ -75,170 +88,298 @@ var GUI = {
 		},
 		
 		/**
-		 * Ajoute un jeton � la cellule cible
-		 * @param	div
-		 * @param	string
-		 * */
-		addToken: function(token, line, column) {
-			var cell = this.getCell(line, column);
+			Ajoute les événements d'écoute pour un tour.
+			@param	{string}
+		*/
+		addEvent: function (color) {
 			
-			cell.appendChild(token);
 		},
-		
-		getMvtType: function(move) {
-			return move.split("-")[0][0];
-		},
-		getSrcCoord: function(move) {
-			return move.split("-")[1];
-		},
-		getSrcLine: function(move) {
-			return move.split("-")[1][0];
-		},
-		getSrcColumn: function(move) {
-			return move.split("-")[1][1];
-		},
-		getCibleCoord: function(move) {
-			return move.split("-")[2];
-		},
-		getCoordTaken: function(move) {
-			return move.split("-")[3];
-		},
-		
-		initTurn: function(moves) {
-			this._moves = moves;
-			this.addListenersTokens();
-		},
-		
-		addListenersTokens: function() {
-			var line, column;
-			var token;
-			var moves = this._moves;
-			for(let move of moves) {
-				line = this.getSrcLine(move);
-				column = this.getSrcColumn(move);
-				token = this.getToken(line, column);
-				token.addEventListener("click", GUI.BOARD.addListenersTargets, false);
-			}
-		},
-		
-		addListenersTargets: function() {
-			var line = this.parentNode.dataset.line;
-			var column = this.parentNode.dataset.column;
-			GUI.BOARD.HANDLER.__init(this, line, column);
-			GUI.BOARD.removeListenersCells();
-
-			for(var i=0 ; i<GUI.BOARD._moves.length ; i++) {
-				var moveSrcLine = GUI.BOARD.getSrcLine(GUI.BOARD._moves[i]);
-				var moveSrcColumn = GUI.BOARD.getSrcColumn(GUI.BOARD._moves[i]);
-				var moveSrcToken = GUI.BOARD.getToken(moveSrcLine, moveSrcColumn)
-				if (this == moveSrcToken) {
-					var moveTargetLine = GUI.BOARD.getCibleCoord(GUI.BOARD._moves[i])[0];
-					var moveTargetColumn = GUI.BOARD.getCibleCoord(GUI.BOARD._moves[i])[1];
-					var moveTargetCell = GUI.BOARD.getCell(moveTargetLine, moveTargetColumn);
-					
-					moveTargetCell.className = "focus";
-					moveTargetCell.addEventListener("click", GUI.BOARD.doAction, false);
-				}
-			}
-		},
-		
-		doAction: function() {
-			GUI.BOARD.HANDLER._lineTarget = this.dataset.line;
-			GUI.BOARD.HANDLER._columnTarget = this.dataset.column;
-			
-			GUI.BOARD.removeListenersCells();
-			GUI.BOARD.HANDLER.doAction();
-		},
-		
-		removeListenersTokens: function() {
-			var tokens = document.querySelectorAll("#board div[data-type='pawn'], #board div[data-type='queen']");
-			for(var i=0 ; i<tokens.length ;i++) {
-				tokens[i].removeEventListener("click", GUI.BOARD.addListenersTargets, false);
-			}
-		},
-		
-		removeListenersCells: function() {
-			var cells = document.querySelectorAll("#board td");
-			for(var i=0 ; i<cells.length ;i++) {
-				cells[i].removeEventListener("click", GUI.BOARD.doAction, false);
-				cells[i].className = "";
-			}
-		},
+	},
 	
-		HANDLER: {
-			_lineSrc: undefined,
-			_columnSrc: undefined,
-			_lineTarget: undefined,
-			_columnTarget: undefined,
-			
-			__init: function(elmt, line, column) {
-				this._element = elmt;
-				this._lineSrc = line;
-				this._columnSrc = column;
-			},
-			print: function() {
-				console.log(this._lineSrc, this._columnSrc, this._lineTarget, this._columnTarget);
-			},
-			
-			searchMovement: function() {
-				var moves = GUI.BOARD._moves;
+	EVENT: {
+		_prisesMax: undefined,
+		_type: undefined,
+		
+		deserialize: function (moves, type) {
+			if (type == "D") {
+				return this.deserialize$displacement(moves);
+			} else if (type == "C") {
+				return this.deserialize$capture(moves);
+			}
+		},
+		
+		deserialize$capture: function (moves) {
+			var movesF = [];
+			for (let move of moves) {
+				move = move.substring(3, move.length);
+				move = move.split("-");
 				
-				for(var i = 0 ; i<moves.length ; i++) {
-					var lineSource = GUI.BOARD.getSrcLine(moves[i]);
-					var columnSource = GUI.BOARD.getSrcColumn(moves[i]);
-					var lineTarget = GUI.BOARD.getCibleCoord(moves[i])[0];
-					var columntarget = GUI.BOARD.getCibleCoord(moves[i])[1];
-
-					if(this._lineSrc == lineSource && this._columnSrc == columnSource
-					&& this._lineTarget == lineTarget && this._columnTarget == columntarget) {
-						return moves[i];
+				var sources = [];
+				var targets = [];
+				for (var i in move) {
+					var c = {line: move[i][0], column: move[i][1]};
+					if (i % 2 == 0) {
+						sources.push(c);
+					} else if (i % 2 == 1) {
+						targets.push(c);
 					}
 				}
+				
+				movesF.push({sources: sources, targets: targets});
+				
+			}
+			return movesF;
+		},
+		
+		deserialize$displacement: function (moves) {
+			var movesF = [];
+			
+			for (let move of moves) {
+				move = move.substring(2, move.length);
+				move = move.split("-");
+				
+				var sources = [];
+				for (var i = 0 ; i<2 ; i++) {
+					var c = {line: move[i][0], column: move[i][1]};
+					sources.push(c);
+				}
+				
+				movesF.push({sources: sources});
+				
+			}
+			return movesF;
+		},
+		
+		serialize: function (move) {
+			if (GUI.EVENT._type == "D") {
+				return this.serialize$displacement(move);
+			} else if (GUI.EVENT._type == "C") {
+				return this.serialize$capture(move);
+			}
+		},
+		serialize$capture: function (move) {
+			var n = move.targets.length;
+			var moveFormated = "C" + n;
+			moveFormated += "-" + move.sources[0].line + move.sources[0].column;
+			move.sources.splice(0,1);
+			
+			for (var i = 0 ; i<n ; i++) {
+				moveFormated += "-" + move.targets[i].line + move.targets[i].column;
+				moveFormated += "-" + move.sources[i].line + move.sources[i].column;
+			}
+			return moveFormated;
+		},
+		serialize$displacement: function (move) {
+			var moveFormated = "D";
+			moveFormated += "-" + move.sources[0].line + move.sources[0].column;
+			moveFormated += "-" + move.sources[1].line + move.sources[1].column;
+			
+			return moveFormated;
+		},
+		
+		init: function (moves) {
+			if (moves[0][0] == "C") {
+				this._prisesMax = moves[0][1];
+				this._type = "C";
+				var formatedCaptures = this.deserialize(moves, "C");
+				this.HANDLER.setMoves(formatedCaptures);
+			} else if (moves[0][0] == "D") {
+				this._prisesMax = 1;
+				this._type = "D";
+				var formatedCaptures = this.deserialize(moves, "D");
+				this.HANDLER.setMoves(formatedCaptures);
+			}
+			
+			this.addListenerAll();
+		},
+		
+		addListenerAll: function () {
+			var sources = this.HANDLER.searchSources();
+			for (let source of sources) {
+				var token = GUI.BOARD.getToken(source.line, source.column);
+				token.addEventListener("click", this.onSource, false);
+			}
+		},
+		
+		onSource: function () {
+			var line = this.parentNode.dataset.line;
+			var column = this.parentNode.dataset.column;
+			
+			GUI.EVENT.clear();
+			GUI.EVENT.HANDLER.addSource(line, column);
+			
+			var destinations = GUI.EVENT.HANDLER.searchSources();
+			for (let destination of destinations) {
+				var cell = GUI.BOARD.getCell(destination.line, destination.column);
+				cell.className = "focus";
+				cell.addEventListener("click", GUI.EVENT.onDestination, false);
+			}
+		},
+		
+		onDestination: function () {
+			var line = this.dataset.line;
+			var column = this.dataset.column;
+			
+			GUI.EVENT.clear();
+			GUI.EVENT.HANDLER.addSource(line, column);
+			
+			if (GUI.EVENT._type == "D") {
+				GUI.EVENT.HANDLER.applyDisplacement();
+			} else if (GUI.EVENT._type == "C") {
+				GUI.EVENT.HANDLER.applyCapture();
+			}
+			
+			// transformer dame
+			var token = GUI.BOARD.getToken(line, column);
+			if ((token.dataset.color == "black" && line == 7)
+			|| (token.dataset.color == "white" && line == 0)) {
+				token.dataset.type = "queen";
+			}
+			
+			// suite pour les multicaptures
+			if (GUI.EVENT._prisesMax == GUI.EVENT.HANDLER.getPriseCurrent()) {
+				var move = GUI.EVENT.HANDLER.getMove();
+				move = GUI.EVENT.serialize(move);
+				ENGINE.LOGIC.doMovement(move);
+				GAME.MANAGER.playTurn(3);
+			} else {
+				var destinations = GUI.EVENT.HANDLER.searchSources();
+				for (let destination of destinations) {
+					var cell = GUI.BOARD.getCell(destination.line, destination.column);
+					cell.className = "focus";
+					cell.addEventListener("click", GUI.EVENT.onDestination, false);
+				} 
+			}
+		},
+		
+		clear: function () {
+			var tokens = document.querySelectorAll("#board tr td div");
+			var cells = document.querySelectorAll("#board tr td");
+			
+			for (let token of tokens) {
+				token.removeEventListener("click", this.onSource, false); 
+			}
+			
+			for (let cell of cells) {
+				cell.className = "";
+				cell.removeEventListener("click", GUI.EVENT.onDestination, false); 
+			}
+		},
+		
+		
+		HANDLER : {
+			_moves: [[]],
+			_sources: [],
+			
+			setMoves: function (moves) {
+				this._moves = moves;
+				this._sources = [];
 				return;
 			},
 			
-			doAction: function() {
-				var move = this.searchMovement();
-				console.log(move);
-				if(GUI.BOARD.getMvtType(move) == "D") {
-					this.doDisplacement();
-				} else if (GUI.BOARD.getMvtType(move) == "C") {
-					this.doCapture(move);
-				}
+			getPriseCurrent: function () {
+				var n = this._sources.length - 1;
 				
-				GUI.BOARD.removeListenersTokens();
-				// GAME.MANAGER.doPlayMovementgit status(2, move);
+				if (n < 0) {
+					return 0;
+				}
+				return n;
 			},
 			
-			doDisplacement: function() {
-				var token = GUI.BOARD.getToken(this._lineSrc, this._columnSrc);
-				var cell = GUI.BOARD.getCell(this._lineTarget, this._columnTarget);
-				cell.appendChild(token);
+			addSource: function (line, column) {
+				var coord = {line: line, column: column};
+				this._sources.push(coord);
+				return;
 			},
-			doCapture:function(move) {
-				this.doDisplacement();
-				var line = GUI.BOARD.getCoordTaken(move)[0];
-				var column = GUI.BOARD.getCoordTaken(move)[1];
-				var token = GUI.BOARD.getToken(line, column);
-				token.parentNode.removeChild(token);
+			
+			searchSources: function () {
+				var n = this._sources.length || 0;
+				var sources = [];
+				for (let move of this._moves) {
+					if (this.moveValide(move.sources)) {
+						sources.push(move.sources[n]);
+					}
+				}
+				
+				var unique = sources.getUniqueCoord();
+				return unique;
+			},
+			
+			moveValide: function (candidate) {
+				if (this._sources.length > 0) {
+					for (let i in this._sources) {
+						if (this._sources[i].line != candidate[i].line 
+						|| this._sources[i].column != candidate[i].column) {
+							return false;
+						}
+					}
+				}
+				
+				return true;
+			},
+			
+			getMove: function () {
+				for (let move of this._moves) {
+					if (this.moveValide(move.sources)) {
+						return move;
+					}
+				}
+			},
+			
+			applyCapture: function () {
+				var n = this._sources.length;
+				
+				var source = this._sources[n-2];
+				var destination = this._sources[n-1];
+				var target = this.searchTarget();
+				var token = GUI.BOARD.getToken(source.line, source.column);
+				GUI.BOARD.removeToken(source.line, source.column);
+				GUI.BOARD.removeToken(target.line, target.column);
+				GUI.BOARD.addToken(destination.line, destination.column, token);
+				return;
+			},
+			
+			applyDisplacement: function () {
+				var n = this._sources.length;
+				
+				var source = this._sources[0];
+				var destination = this._sources[1];
+				
+				var token = GUI.BOARD.getToken(source.line, source.column);
+				GUI.BOARD.removeToken(source.line, source.column);
+				GUI.BOARD.addToken(destination.line, destination.column, token);
+				return;
+			},
+			
+			searchTarget: function () {
+				var n = this._sources.length - 2;
+				for (let move of this._moves) {
+					if (this.moveValide(move.sources)) {
+						return move.targets[n];
+					}
+				}
+				return;
 			}
 		}
-	},
-}
-/*
-function main() {
-	GUI.BOARD.__init();
-	var queen = GUI.BOARD.buildToken("queen","black");
-	GUI.BOARD.addToken(queen,3,3);
-	var token = GUI.BOARD.buildToken("pawn","white");
-	GUI.BOARD.addToken(token,3,2);
-	
-	var moves = [
-		"D-20-30",
-		"C-33-31-32",
-		"C-22-42-32","D-33-34","D-33-43","D-33-35","D-33-36","D-33-37","C-33-30-32"
-	];
-	GUI.BOARD.initTurn(moves);
+	}
 }
 
-main();*/
+/**
+	Retourne les valeurs uniques d'un tableau
+	@param	{array}
+	@return	{array}
+*/
+Array.prototype.getUniqueCoord = function(){
+   var a = [];
+   for (var i=0 ; i < this.length ; i ++) {
+	   a.push(this[i].line + "" + this[i].column);
+   }
+   a = [... new Set(a)];
+   
+   var result = [];
+   for (let c of a) {
+	   result.push({line: c[0], column: c[1]});
+   }
+   
+   return result;
+}
