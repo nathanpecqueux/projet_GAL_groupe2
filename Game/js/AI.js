@@ -1,0 +1,79 @@
+"use strict";
+
+var AI = {
+	_memory: [[]],
+	
+	restaure: function () {
+		ENGINE.BOARD.setBoard(this._memory);
+		return;
+	},
+	
+	generateMove: function (num, moves) {
+		if (num == 1) {
+			return this.generateMove$1(moves);
+		} else if (num == 2) {
+			return this.generateMove$2(moves);
+		}
+	},
+	
+	generateMove$1: function (moves) {
+		var value = Math.floor((Math.random() * moves.length));
+		return moves[value];
+	},
+	
+	generateMove$2: function (moves) {
+		var scores = [];
+		for (var i=0, n = moves.length ; i<n ; i++) {
+			scores.push(0);
+		}
+		
+		var currentPlayer = GAME.MANAGER.getCurrentPlayer();
+		var memoire = ENGINE.BOARD.copyBoard();
+		var tokenB = ENGINE.BOARD._tokenBlack;
+		var tokenW = ENGINE.BOARD._tokenWhite;
+		
+		for (var i=0, n = moves.length ; i<n ; i++) {
+			for (var j = 0 ; j<10 ; j++) {
+				this.prepareBoard(memoire, tokenW, tokenB, moves[i]);
+				
+				var result = ENGINE.AI.simulate(currentPlayer);
+				
+				if (result == currentPlayer) {
+					scores[i]++;
+				}
+			}
+		}
+		
+		var valueMax = scores[0];
+		var indexMax = 0;
+		
+		for (var i=1, n=scores.length ; i<n ; i++) {
+			var candidate = scores[i];
+			if (candidate > valueMax) {
+				valueMax = candidate;
+				indexMax = i;
+			}
+		}
+		
+		var move = moves[indexMax];	
+
+		// init board
+		ENGINE.BOARD._tokenBlack = tokenB;
+		ENGINE.BOARD._tokenWhite = tokenW;
+		ENGINE.BOARD.setBoard(memoire);
+			
+		return move;
+	},
+	
+	prepareBoard: function (memoire, tokenW, tokenB, move) {
+		ENGINE.BOARD._tokenBlack = tokenB;
+		ENGINE.BOARD._tokenWhite = tokenW;
+		
+		var init = memoire.map(function(arr) {
+			return arr.slice();
+		});
+		ENGINE.BOARD.setBoard(init);
+		ENGINE.LOGIC.doMovement(move);
+		return;
+	},
+}
