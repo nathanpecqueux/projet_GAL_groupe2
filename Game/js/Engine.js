@@ -1,6 +1,7 @@
 /**
  * Created by nathan on 13/12/16.
  */
+
 "use strict";
 
 var ENGINE = {
@@ -348,7 +349,7 @@ var ENGINE = {
 			@return	{Object::capture}
 		*/
 		getCaptureTo: function(token, sens) {		
-			var token = Object.assign({}, token);
+			var token = clone(token);
 			var ennemy = this.getEnnemy(token, sens);
 			
 			if (Object.keys(ennemy).length === 0) {
@@ -387,7 +388,7 @@ var ENGINE = {
 			@return	{[Object::coord]}
 		*/
 		getFreeDestinations: function (token, target, sens) {
-			var target = Object.assign({}, target);
+			var target = clone(target);
 			var searchDestinations = true;
 			var destinations = [];
 			
@@ -396,7 +397,7 @@ var ENGINE = {
 				
 				if (ENGINE.BOARD.isInBoard(target.line, target.column)
 				&& !ENGINE.BOARD.containsToken(target.line, target.column)) {
-					var destination = Object.assign({}, target);
+					var destination = clone(target);
 					destinations.push(destination);
 				} else {
 					searchDestinations = false;
@@ -417,7 +418,7 @@ var ENGINE = {
 			@return {Object::token}
 		*/
 		getEnnemy: function(token, sens) {
-			var token = Object.assign({}, token);
+			var token = clone(token)
 			var target = {line: token.line, column: token.column};
 			var ennemy = {};
 			var searchEnnemy = true;
@@ -524,7 +525,7 @@ var ENGINE = {
 		},
 		
 		updateToken: function (token, destination) {
-			var token = Object.assign({}, token);
+			var token = clone(token);
 			if ((token.color == "black" && destination.line == 7) 
 			|| (token.color == "white" && destination.line == 0)) {
 				token.type = "queen";
@@ -767,8 +768,6 @@ var ENGINE = {
 			@return	Int
 		*/
 		victory: function () {
-			
-			
 			if (this.draw()) {
 				return 1;
 			} else if (ENGINE.BOARD._tokenBlack > 0 && ENGINE.BOARD._tokenWhite > 0 ) {
@@ -812,4 +811,70 @@ var ENGINE = {
 			return token;
 		},
 	},
+	
+	AI: {
+		_memory: {},
+		
+		memento: function (board, tokenWhite, tokenBlack) {
+			board = ENGINE.BOARD.copyBoard();
+			this._memory = {
+				board: board,
+				tokenWhite: tokenWhite,
+				tokenBlack: tokenBlack,
+			};
+		},
+		
+		restaure: function () {
+			ENGINE.BOARD.setBoard(this._memory.board);
+			ENGINE.BOARD._tokenBlack = this._memory.tokenBlack;
+			ENGINE.BOARD._tokenWhite = this._memory.tokenWhite;
+			return
+		},
+		
+		simulate: function (player) {
+			// this.memento(board, ENGINE.BOARD._tokenBlack, ENGINE.BOARD._tokenWhite);
+			// ENGINE.BOARD.setBoard(board);
+			
+			var turn = 0; var color;
+			if (player == "black") {
+				turn = 1;
+			}
+			
+			while (ENGINE.LOGIC.victory() == 0) {
+				if (turn % 2 == 0) {
+					color ="white";
+				} else {
+					color ="black";
+				}
+				var moves = ENGINE.LOGIC.getMovementAll(color);
+				var value = Math.floor((Math.random() * moves.length));
+				var move = moves[value];
+				
+				ENGINE.LOGIC.doMovement(move);
+				
+				turn++;
+			}
+			return ENGINE.LOGIC.victory();
+		},
+	}
 };
+
+function clone(obj) {
+  if (obj === null || typeof(obj) !== 'object' || 'isActiveClone' in obj)
+	return obj;
+
+  if (obj instanceof Date)
+	var temp = new obj.constructor(); //or new Date(obj);
+  else
+	var temp = obj.constructor();
+
+  for (var key in obj) {
+	if (Object.prototype.hasOwnProperty.call(obj, key)) {
+	  obj['isActiveClone'] = null;
+	  temp[key] = clone(obj[key]);
+	  delete obj['isActiveClone'];
+	}
+  }
+
+  return temp;
+}
