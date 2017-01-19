@@ -4,19 +4,36 @@ var GUI = {
 	PLAYER: {
 		_player: "B",
 		
-		currentPlayer: function() {
-			// this._player = ENGINE.getPlayer();
+		add: function (num, player) {
+			num++;
+			this.setName(num, player.name);
+			this.setType(num, player.type);
+			return;
 		},
 		
-		updateCurrent: function() {
-			this.currentPlayer();
-			var player = document.querySelector("#players .currentPlayer");
+		setName: function(num, name) {
+			var nameBox = document.querySelector("#player_" + num + " .name");
+			nameBox.innerHTML = name;
+		},
+		
+		setType: function(num, type) {
+			var typeBox = document.querySelector("#player_" + num + " .type");
+			typeBox.innerHTML = type;
+		},
+		
+		updateTurn: function (color) {
+			var white = document.querySelector("#player_1");
+			var black = document.querySelector("#player_2");
 			
-			if(this._player == "B") {
-				player.innerHTML = "Black";
-			} else if (this._player == "W") {
-				player.innerHTML = "White";
+			if (color == "white") {
+				white.className = "current";
+				black.className = "";
+			} else if (color == "black") {
+				black.className = "current";
+				white.className = "";
 			}
+			
+			return;
 		}
 	},
 	
@@ -87,12 +104,70 @@ var GUI = {
 			return token;		
 		},
 		
-		/**
-			Ajoute les événements d'écoute pour un tour.
-			@param	{string}
-		*/
-		addEvent: function (color) {
+		doMovement: function (move) {
+			if (move[0] == "D") {
+				this.doMovement$displacement(move);
+			} else if (move[0] == "C") {
+				this.doMovement$captureAll(move);
+			}
 			
+			
+			return;
+		},
+		
+		doMovement$displacement: function (move) {
+			move = move.split("-");
+			move.splice(0,1);
+			var sourceToken = this.getToken(move[0][0], move[0][1]);
+			var sourceCell = this.getCell(move[0][0], move[0][1]);
+			var destination = this.getCell(move[1][0], move[1][1]);
+			
+			sourceCell.removeChild(sourceToken);
+			destination.appendChild(sourceToken);
+			
+			// transformer dame
+			if ((sourceToken.dataset.color == "black" && destination.dataset.line == 7)
+			|| (sourceToken.dataset.color == "white" && destination.dataset.line == 0)) {
+				sourceToken.dataset.type = "queen";
+			}
+			
+			return;
+		},
+		
+		doMovement$captureAll: function (move) {
+			move = move.split("-");
+			move.splice(0,1);
+			
+			this.doMovement$capture(move);
+			
+			return;
+		},
+		
+		doMovement$capture: function (move) {
+			setTimeout(function () {
+				if (move.length < 2) {
+					return;
+				} else {
+					var sourceToken = GUI.BOARD.getToken(move[0][0], move[0][1]);
+					var sourceCell = GUI.BOARD.getCell(move[0][0], move[0][1]);
+					var targetToken = GUI.BOARD.getToken(move[1][0], move[1][1]);
+					var targetCell = GUI.BOARD.getCell(move[1][0], move[1][1]);
+					var destination = GUI.BOARD.getCell(move[2][0], move[2][1]);
+					
+					sourceCell.removeChild(sourceToken);
+					targetCell.removeChild(targetToken);
+					destination.appendChild(sourceToken);
+					
+					// transformer dame
+					if ((sourceToken.dataset.color == "black" && destination.dataset.line == 7)
+					|| (sourceToken.dataset.color == "white" && destination.dataset.line == 0)) {
+						sourceToken.dataset.type = "queen";
+					}
+					
+					move.splice(0,2);
+					return GUI.BOARD.doMovement$capture(move);
+				}
+			}, 500);
 		},
 	},
 	
@@ -256,13 +331,13 @@ var GUI = {
 			var tokens = document.querySelectorAll("#board tr td div");
 			var cells = document.querySelectorAll("#board tr td");
 			
-			for (let token of tokens) {
-				token.removeEventListener("click", this.onSource, false); 
+			for (var i=0, n=tokens.length ; i<n ; i++) {
+				tokens[i].removeEventListener("click", this.onSource, false); 
 			}
 			
-			for (let cell of cells) {
-				cell.className = "";
-				cell.removeEventListener("click", GUI.EVENT.onDestination, false); 
+			for (var i=0, n=cells.length ; i<n ; i++) {
+				cells[i].className = "";
+				cells[i].removeEventListener("click", GUI.EVENT.onDestination, false); 
 			}
 		},
 		
@@ -374,7 +449,9 @@ Array.prototype.getUniqueCoord = function(){
    for (var i=0 ; i < this.length ; i ++) {
 	   a.push(this[i].line + "" + this[i].column);
    }
-   a = [... new Set(a)];
+   a = a.filter(function(item, pos) {
+		return a.indexOf(item) == pos;
+	})
    
    var result = [];
    for (let c of a) {
