@@ -3,4 +3,5 @@ function main() {
 	GAME.MANAGER.run();
 }
 
-main();
+var run = document.querySelector("#run");
+run.addEventListener("click", main, false);
