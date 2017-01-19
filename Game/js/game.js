@@ -10,8 +10,10 @@ var GAME = {
 			GUI.BOARD.__init();
 			this._turn = 0;
 			
-			GAME.PLAYER.add("Manon");
-			GAME.PLAYER.add("Thomas");
+			GAME.PLAYER.add("Manon", "Human");
+			GAME.PLAYER.add("Thomas", "AI1");
+			
+			GAME.PLAYER.updateGUI();
 		},
 		
 		run: function() {
@@ -36,73 +38,59 @@ var GAME = {
 		
 		doMovement: function() {
 			var currentPlayer = this.getCurrentPlayer();
-			var type = "human";
+			var type = GAME.PLAYER.getType(currentPlayer);
 			var moves = ENGINE.LOGIC.getMovementAll(currentPlayer);
 			
-			if(type == "human") {
+			if(type == "Human") {
 				GUI.EVENT.init(moves);
-			}
-			// if(type == "AI") {
-				// var coord = Pentago.AI.generatePutMarble();
-				// setTimeout(function (){
-					// Game.ViewModel.doMovement(coord);
-					// Game.Manager.playTurn(2);
-				// }, 500);
-				
-			// }
-		},
-		
-		getMovement: function (move) {
-			
-		},
-		
-		rotation: function() {
-			var currentPlayer = Pentago.Manager.currentPlayer();
-			var type = Pentago.Players.getType(currentPlayer);
-			
-			if(type == "human") {
-				Events.Board.addListenerAllRotations();
-			}
-			if(type == "AI") {
-				var rotation = Pentago.AI.generateRotation();
-				if(rotation[0] == "c") {
-					setTimeout(function (){
-						Game.ViewModel.rotation(rotation[1]);
-						Game.Manager.playTurn(4);
-					}, 500);
-				} else {
-					setTimeout(function (){
-						Game.ViewModel.rotationReverse(rotation[1]);
-						Game.Manager.playTurn(4);
-					}, 500);
-				}
+			} else if (type == "AI1") {
+				var move = AI.generateMove(1, moves);
+				setTimeout(function () {
+					ENGINE.LOGIC.doMovement(move);
+					GUI.BOARD.doMovement(move);
+					GAME.MANAGER.playTurn(3);
+				}, 500);
+			} else if (type == "AI2") {
+				var move = AI.generateMove(2, moves);
+				setTimeout(function () {
+					ENGINE.LOGIC.doMovement(move);
+					GUI.BOARD.doMovement(move);
+					GAME.MANAGER.playTurn(3);
+				}, 0);
 			}
 		},
 		
 		getCurrentPlayer: function () {
 			var currentPlayer = (this._turn % 2) + 1;
 			if (currentPlayer == 1) {
-				var color = "white";
-			} else if (currentPlayer == 2) {
 				var color = "black";
+			} else if (currentPlayer == 2) {
+				var color = "white";
 			}
 			return color;
 		},
 		
 		newTurn: function() {
+			this._turn++;
 			var currentPlayer = this.getCurrentPlayer();
-			var type = "human";
-			
-			if(type == "human") {
-				this._turn++;
+			GUI.PLAYER.updateTurn(currentPlayer);
+			var infoBox = document.querySelector("#info p");
+			infoBox.innerHTML = "Tour n<sup>o</sup>" + this._turn;
+
+			var type = GAME.PLAYER.getType(currentPlayer);
+			if(type == "Human" || type == "AI2") {
 				this.playTurn(2);
+			} else if (type == "AI1") {
+				setTimeout(function () {
+					GAME.MANAGER.playTurn(2);
+				}, 500);
+			} else if (type == "AI2") {
+				setTimeout(function () {
+					GAME.MANAGER.playTurn(2);
+				}, 0);
 			}
-			// if(type == "AI") {
-				// setTimeout(function (){
-					// Game.ViewModel.newTurn();
-					// Game.Manager.playTurn(1);
-				// }, 500);
-			// }
+			
+			return;
 		},
 		
 		victory: function () {
@@ -119,53 +107,17 @@ var GAME = {
 		},
 		
 		showWinner: function (value) {
-			console.log("Jeton noir : " + ENGINE.BOARD._tokenBlack);
-			console.log("Jeton blanc : " + ENGINE.BOARD._tokenWhite);
 			if (value == 1) {
-				console.log("Match nul.");
+				var result = "Match nul";
 			} else if (value == "white") {
-				console.log("Le gagnant est blanc.");
+				var result = "Le gagnant est blanc.";
 			} else if (value == "black") {
-				console.log("Le gagnant est noir.");
+				var result = "Le gagnant est noir.";
 			}
-		}
-	},
-		
-	ViewModel: {
-		putMarble: function(coord) {
-			Pentago.Engine.putMarble(coord);
-			GUI.Board.putMarble(coord);
-		},
-		
-		rotation: function(subBoard) {
-			Pentago.Engine.rotation(subBoard);
-			GUI.Board.rotate(subBoard);
-		},
-		rotationReverse: function(subBoard) {
-			Pentago.Engine.rotationReverse(subBoard);
-			GUI.Board.rotateReverse(subBoard);
-		},
-		
-		newTurn: function() {
-			// GAME.Manager.newTurn();
-			// GUI.Players.update();
-		},
-		
-		end: function() {
-			Events.Board.clearListenerAllCells();
-			Events.Board.clearListenerAllRotations();
 			
-			this.showResult();
-		},
-		showResult: function() {
-			setTimeout(function (){
-				var result = document.createTextNode(Pentago.Manager.getResult());
-				var blockResult = document.querySelector("#result");
-				
-				blockResult.appendChild(result);
-				blockResult.className = "active";
-			}, 500);
-		},
+			var infoBox = document.querySelector("#info p");
+			infoBox.innerHTML = result;
+		}
 	},
 	
 	PLAYER: {
@@ -190,6 +142,16 @@ var GAME = {
 			return;
 		},
 		
+		getType: function (color) {
+			if (color == "white") {
+				var n = 0;
+			} else if (color == "black") {
+				var n = 1;
+			}
+			
+			return this._players[n].type;
+		},
+		
 		remove: function (id) {
 			if (id >= 0 && id < this._maxPlayers) {
 				this._players.splice(id, 1);
@@ -201,6 +163,12 @@ var GAME = {
 			for (let i in this._players) {
 				console.log("\tplayer: {num: " + i + ", name: " + this._players[i].name+ "}");
 			}
-		}, 
+		},
+		
+		updateGUI: function () {
+			for (var i=0, n = this._players.length ; i<n ; i++) {
+				GUI.PLAYER.add(i, this._players[i]);
+			}
+		},
 	}
 };
